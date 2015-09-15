@@ -88,6 +88,10 @@ valgrind:
 	@echo -e "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 
+# Rule to run the resulted binary file
+run: $(BINDIR)/$(BINARY)
+	@./$^
+
 # Rule for cleaning the project
 clean:
 
