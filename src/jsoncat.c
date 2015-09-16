@@ -1,5 +1,5 @@
 /*
- * =====================================================================================
+ * ============================================================================
  *
  *       Filename:  jsoncat.c
  *
@@ -13,7 +13,7 @@
  *         Author:  Gustavo Pantuza 
  *   Organization:  Software Community
  *
- * =====================================================================================
+ * ============================================================================
  */
 
 
@@ -23,6 +23,9 @@
 
 #include "args.h"
 #include "colors.h"
+
+
+#define __JSONCAT_VERSION__ 0.1
 
 
 int
@@ -35,7 +38,7 @@ main (int argc, char* argv[])
     fprintf(stdout, BLUE "Command line options:\n" NO_COLOR);
     fprintf(stdout, BROWN "help: %d\n" NO_COLOR, options.help);
     fprintf(stdout, BROWN "version: %d\n" NO_COLOR, options.version);
-    fprintf(stdout, BROWN "no-colors: %d\n" NO_COLOR, options.use_colors);
+    fprintf(stdout, BROWN "use colors: %d\n" NO_COLOR, options.use_colors);
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
 
     return EXIT_SUCCESS;
