@@ -22,6 +22,7 @@
 #include <string.h>
 
 
+#include "messages.h"
 #include "args.h"
 #include "colors.h"
 
@@ -36,13 +37,6 @@ static void set_default_options(options_t* options)
     options->version = false;
     options->use_colors = true;
 }
-
-
-
-/* TODO: Move this functions to a messages file */
-void help () { }
-void version () { }
-void usage () { }
 
 
 
