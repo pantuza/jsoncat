@@ -25,8 +25,6 @@
 #include "colors.h"
 
 
-#define __JSONCAT_VERSION__ 0.1
-
 
 int
 main (int argc, char* argv[])
