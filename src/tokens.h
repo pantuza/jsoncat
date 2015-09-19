@@ -36,8 +36,11 @@
 #define STRING_1        '"'
 #define STRING_SCAPE    '\\'
 
-#define TRUE_value      true
-#define FALSE_value     false
-#define NULL_value      'null'
+#define TRUE_VALUE      900
+#define FALSE_VALUE     901
+#define NULL_VALUE      902
+
+#define NUMBER          903
+
 
 #endif // TOKENS_H
