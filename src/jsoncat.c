@@ -23,6 +23,7 @@
 
 #include "args.h"
 #include "colors.h"
+#include "lexical.h"
 
 
 
@@ -32,6 +33,8 @@ main (int argc, char* argv[])
     /* Read command line options */
     options_t options;
     jsoncat_options_parser(argc, argv, &options);
+
+    start_parsing(&options);
 
     fprintf(stdout, BLUE "Command line options:\n" NO_COLOR);
     fprintf(stdout, BROWN "help: %d\n" NO_COLOR, options.help);
