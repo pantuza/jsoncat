@@ -17,5 +17,50 @@
  * =====================================================================================
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 
+
+#include "colors.h"
 #include "lexical.h"
+
+
+
+/* 
+ * Tries to open the input json file. Exits with failure in case of any error
+ */
+void
+open_json_file (FILE* file, char filename[])
+{
+    file = fopen(filename, "r");
+
+    if (!file)
+    {
+        fprintf(stderr, RED "Error on openning file '%s'\n" NO_COLOR,
+                filename);
+        exit(EXIT_FAILURE);
+    }
+}
+
+
+
+/*
+ * Starts the parsing by doing the lexical analysis
+ */
+void
+start_parsing (options_t* options)
+{
+    FILE* file = NULL;
+    open_json_file(file, options->file_name);
+}
+
+
+
+/*
+ * Search for tokens on the opened json file
+ */
+void
+find_token (FILE* file, struct token* token, char json)
+{
+    
+}
