@@ -26,12 +26,12 @@ struct token
 {
     /* The token type (one of the defines in tokens.h) */
     int type;
-    /* The value read that identifies the token */
-    char* value[0]; // 0 'avoids flexible array member not at end of struct'
     /* Line number */
     int line;
     /* Column number */
     int column;
+    /* The value read that identifies the token */
+    char value[];
 };
 
 
