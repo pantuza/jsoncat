@@ -1,5 +1,5 @@
 /*
- * =====================================================================================
+ * ============================================================================
  *
  *       Filename:  lexical.h
  *
@@ -13,11 +13,15 @@
  *         Author:  Gustavo Pantuza, 
  *   Organization:  Software Community
  *
- * =====================================================================================
+ * ============================================================================
  */
 
 #ifndef LEXICAL_H
 #define LEXICAL_H
+
+
+#include "args.h"
+
 
 /*
  * Types used by the lexical analiser
@@ -37,7 +41,7 @@ struct token
 
 
 /* Public functions of the lexical analyser */
-
+void start_parsing (options_t* options);
 
 
 #endif // LEXICAL_H
