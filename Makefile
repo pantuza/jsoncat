@@ -5,10 +5,35 @@
 #
 
 
+# Gets from shell the operating system
+OS := $(shell uname -s)
+
+# String for the MAC OS X operationg system
+MAC_OS_X_OSTYPE := Darwin
+
+#
+# Color prefix for Linux based distributions
+#
+COLOR_PREFIX := e
+
+# echo command line options for Linux based distributions
+ECHO_OPTS := -en
+
+
+#
+# If the operating system is MAC OS X, the colors prefix and echo options 
+# must be different
+#
+ifeq ($(OS), $(MAC_OS_X_OSTYPE))
+	COLOR_PREFIX := 033
+	ECHO_OPTS := -n
+endif
+
+
 # Color definition for print purpose
-BROWN=\e[0;33m
-BLUE=\e[1;34m
-END_COLOR=\e[0m
+BROWN=\$(COLOR_PREFIX)[0;33m
+BLUE=\$(COLOR_PREFIX)[1;34m
+END_COLOR=\$(COLOR_PREFIX)[0m
 
 
 # Source code directory structure
@@ -62,18 +87,17 @@ OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 # COMPILATION RULES
 #
 
-
 # Rule for link and generate the binary file
 all: $(OBJECTS)
-	@echo -en "$(BROWN)LD $(END_COLOR)";
+	@echo $(ECHO_OPTS) "$(BROWN)LD $(END_COLOR)";
 	$(CC) -o $(BINDIR)/$(BINARY) $+ $(DEBUG) $(CFLAGS) $(LIBS) 
-	@echo -en "\n--\nBinary file placed at" \
+	@echo $(ECHO_OPTS) "\n--\nBinary file placed at" \
 			  "$(BROWN)$(BINDIR)/$(BINARY)$(END_COLOR)\n";
 
 
 # Rule for object binaries compilation
 $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@echo -en "$(BROWN)CC $(END_COLOR)";
+	@echo $(ECHO_OPTS) "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS) 
 
 
@@ -85,7 +109,7 @@ valgrind:
 		--leak-resolution=high \
 		--log-file=$(LOGDIR)/$@.log \
 		$(BINDIR)/$(BINARY)
-	@echo -e "\nCheck the log file: $(LOGDIR)/$@.log\n"
+	@echo $(ECHO_OPTS) "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 
 # Rule to run the resulted binary file
