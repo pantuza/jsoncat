@@ -1,5 +1,5 @@
 /*
- * =====================================================================================
+ * ============================================================================
  *
  *       Filename:  lexical.c
  *
@@ -14,7 +14,7 @@
  *         Author:  Gustavo Pantuza, 
  *   Organization:  Software Community
  *
- * =====================================================================================
+ * ============================================================================
  */
 
 #include <stdio.h>
@@ -33,23 +33,36 @@
 void
 open_json_file (FILE* file, char filename[])
 {
-    if (strcmp(filename, '-'))
-    {
+    if (strcmp(filename, "-") == 0) {
         file = stdin;
+        
+    } else {
+        file = fopen(filename, "r");
     }
-
-    file = fopen(filename, "r");
-
-    if (!file)
-    {
+    
+    if (!file) {
         fprintf(stderr, RED "Error on openning file '%s'\n" NO_COLOR,
                 filename);
         exit(EXIT_FAILURE);
     }
-    else
-    {
-        file = stdin;
-    }
+}
+
+
+
+/*
+ * Search for tokens on the opened json file
+ */
+void
+find_token (FILE* file, struct token* token, char json[])
+{
+    char character;
+
+    do {
+
+        character = getc(file);
+        fprintf(stdout, "character: %c", character);
+
+    } while (character != EOF);
 }
 
 
@@ -60,17 +73,16 @@ open_json_file (FILE* file, char filename[])
 void
 start_parsing (options_t* options)
 {
+
+    /*
+     *  The well formatted json
+     */
+    char json[] = "";
+
+
     FILE* file = NULL;
     open_json_file(file, options->file_name);
-}
 
-
-
-/*
- * Search for tokens on the opened json file
- */
-void
-find_token (FILE* file, struct token* token, char json)
-{
-    
+    struct token* token = NULL;
+    find_token(file, token, json);
 }
