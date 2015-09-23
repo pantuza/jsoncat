@@ -75,23 +75,19 @@ switch_options (int arg, options_t* options)
 
 
 /*
- * Tries to get the file name. Otherwise, prints an error message
+ * Tries to get the file name. Otherwise, gets stdin
  */
 void
 get_file_name (int argc, char* argv[], options_t* options)
 {
 
     /* If there is more arguments, probably, it is an input file */
-    if (optind < argc)
-    {
+    if (optind < argc) {
         strncpy(options->file_name, argv[optind++], FILE_NAME_SIZE);
-    } 
 
-    else 
-    {
-        fprintf(stderr, RED "Missing the input file\n" NO_COLOR);
-        usage();
-        exit(EXIT_FAILURE);
+    /* Otherwise, assumes stdin as the input file */
+    } else {
+        strncpy(options->file_name, "-", FILE_NAME_SIZE);
     }
 }
 
