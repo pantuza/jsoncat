@@ -34,13 +34,13 @@ main (int argc, char* argv[])
     options_t options;
     jsoncat_options_parser(argc, argv, &options);
 
-    start_parsing(&options);
-
     fprintf(stdout, BLUE "Command line options:\n" NO_COLOR);
     fprintf(stdout, BROWN "help: %d\n" NO_COLOR, options.help);
     fprintf(stdout, BROWN "version: %d\n" NO_COLOR, options.version);
     fprintf(stdout, BROWN "use colors: %d\n" NO_COLOR, options.use_colors);
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
+
+    start_parsing(&options);
 
     return EXIT_SUCCESS;
 }
