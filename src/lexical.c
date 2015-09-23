@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 #include "colors.h"
@@ -32,6 +33,11 @@
 void
 open_json_file (FILE* file, char filename[])
 {
+    if (strcmp(filename, '-'))
+    {
+        file = stdin;
+    }
+
     file = fopen(filename, "r");
 
     if (!file)
@@ -39,6 +45,10 @@ open_json_file (FILE* file, char filename[])
         fprintf(stderr, RED "Error on openning file '%s'\n" NO_COLOR,
                 filename);
         exit(EXIT_FAILURE);
+    }
+    else
+    {
+        file = stdin;
     }
 }
 
