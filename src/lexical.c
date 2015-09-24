@@ -30,9 +30,11 @@
 /* 
  * Tries to open the input json file. Exits with failure in case of any error
  */
-void
-open_json_file (FILE* file, char filename[])
+FILE*
+open_json_file (char filename[])
 {
+    FILE *file;
+
     if (strcmp(filename, "-") == 0) {
         file = stdin;
         
@@ -45,6 +47,8 @@ open_json_file (FILE* file, char filename[])
                 filename);
         exit(EXIT_FAILURE);
     }
+
+    return file;
 }
 
 
@@ -53,14 +57,14 @@ open_json_file (FILE* file, char filename[])
  * Search for tokens on the opened json file
  */
 void
-find_token (FILE* file, struct token* token, char json[])
+find_token (FILE *file, struct token *token, char json[])
 {
     char character;
 
     do {
 
         character = getc(file);
-        fprintf(stdout, "character: %c", character);
+        fprintf(stdout, "character: %c\n", character);
 
     } while (character != EOF);
 }
@@ -80,8 +84,7 @@ start_parsing (options_t* options)
     char json[] = "";
 
 
-    FILE* file = NULL;
-    open_json_file(file, options->file_name);
+    FILE *file = open_json_file(options->file_name);
 
     struct token* token = NULL;
     find_token(file, token, json);
