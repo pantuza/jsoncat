@@ -54,6 +54,30 @@ open_json_file (char filename[])
 
 
 /*
+ * Function that assigns the character as a token struct
+ */
+void
+update_current_token (char character, struct token *token)
+{
+
+}
+
+
+
+/*
+ * Function to identify if the token represents any valid Json symbol.
+ * If it matches a symbol, the symbol parser is called. Otherwise
+ * the program exits with errors
+ */
+void
+match_symbol(struct token *token)
+{
+
+}
+
+
+
+/*
  * Search for tokens on the opened json file
  */
 void
@@ -62,9 +86,14 @@ find_token (FILE *file, struct token *token, char json[])
     char character;
 
     do {
-
+        /* Gets the character */
         character = getc(file);
-        fprintf(stdout, "character: %c\n", character);
+
+        /* Update the current token struct */
+        update_current_token(character, token);
+
+        /* matches the token with an Json symbol */
+        match_symbol(token);
 
     } while (character != EOF);
 }
