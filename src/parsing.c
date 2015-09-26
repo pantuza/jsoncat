@@ -17,16 +17,38 @@
  * ============================================================================
  */
 
+#include <stdio.h>
+#include <string.h>
 
 #include "parsing.h"
+#include "colors.h"
 
+
+
+/*
+ * Print token
+ */
+void
+print_token (struct token *token, char json[])
+{
+    int size = strlen(token->value) + 12;
+    char tmp[size];
+
+    snprintf(tmp, size, "%s%s%s\n", RED, token->value, NO_COLOR);
+    strncpy(json, tmp, strlen(tmp));
+    fprintf(stdout, json);
+}
 
 /*
  * Object parser
  */
 void
-object ()
-{
+parse_object (struct token *token, FILE *file, char json[])
+{ 
+
+    print_token(token, json);
+    char character = getc(file);
+
 
 }
 
