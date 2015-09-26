@@ -22,8 +22,11 @@
 #include <string.h>
 
 
+#include "tokens.h"
 #include "colors.h"
 #include "lexical.h"
+#include "parsing.h"
+#include "colors.h"
 
 
 
@@ -54,26 +57,25 @@ open_json_file (char filename[])
 
 
 /*
- * Function that assigns the character as a token struct
- */
-void
-update_current_token (struct token *token, char token_type, char value[])
-{
-    token->type = token_type;
-    strncpy(token->value, value, sizeof(value + 1));
-}
-
-
-
-/*
  * Function to identify if the token represents any valid Json symbol.
  * If it matches a symbol, the symbol parser is called. Otherwise
  * the program exits with errors
  */
 void
-match_symbol(struct token *token)
+match_symbol(char character, struct token *token, FILE *file, char json[])
 {
+    switch (character) {
 
+        case OBJECT_OPEN:
+            token->type = OBJECT_OPEN;
+            token->column += 1;
+            strncpy(token->color, RED, COLOR_STR_SIZE);
+            char tmp[2] = {OBJECT_OPEN, '\0'};
+            int size = strlen(tmp);
+            strncpy(token->value, tmp, 2);
+            parse_object(token, file, json);
+            break;
+    }
 }
 
 
@@ -90,26 +92,10 @@ find_token (FILE *file, struct token *token, char json[])
         /* Gets the character */
         character = getc(file);
 
-        /* Update the current token struct */
-        update_current_token(token, character, "test");
-
         /* matches the token with an Json symbol */
-        match_symbol(token);
+        match_symbol(character, token, file, json);
 
     } while (character != EOF);
-}
-
-
-
-/*  
- * Function to start the first token
- */
-void
-start_token (struct token *token)
-{
-    /* The first token starts on line and column 1 */
-    token->line = 1;
-    token->column = 1;
 }
 
 
@@ -129,8 +115,9 @@ start_parsing (options_t* options)
 
     FILE *file = open_json_file(options->file_name);
 
-    struct token* token;
-    start_token(token);
+    struct token token;
+    token.line = 0;
+    token.column = 0;
 
-    find_token(file, token, json);
+    find_token(file, &token, json);
 }
