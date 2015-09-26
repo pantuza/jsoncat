@@ -23,6 +23,14 @@
 #include "args.h"
 
 
+/* Considered size of any color string defined in colors.h */
+#define COLOR_STR_SIZE 6
+
+
+/* Token value default size */
+#define DEFAULT_VALUE_LENGTH 512
+
+
 /*
  * Types used by the lexical analiser
  */
@@ -34,8 +42,10 @@ struct token
     int line;
     /* Column number */
     int column;
+    /* Color string */
+    char color[COLOR_STR_SIZE];
     /* The value read that identifies the token */
-    char value[];
+    char value[DEFAULT_VALUE_LENGTH];
 };
 
 
