@@ -21,5 +21,13 @@
 #define PARSING_H
 
 
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "lexical.h"
+
+
+void parse_object (struct token *token, FILE *file, char json[]);
+
 
 #endif // PARSING_H
