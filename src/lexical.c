@@ -71,7 +71,6 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             token->column += 1;
             strncpy(token->color, RED, COLOR_STR_SIZE);
             char tmp[2] = {OBJECT_OPEN, '\0'};
-            int size = strlen(tmp);
             strncpy(token->value, tmp, 2);
             parse_object(token, file, json);
             break;
