@@ -22,6 +22,7 @@
 
 #include "parsing.h"
 #include "colors.h"
+#include "tokens.h"
 
 
 
@@ -49,7 +50,9 @@ parse_object (struct token *token, FILE *file, char json[])
     print_token(token, json);
     char character = getc(file);
 
-
+    if (character == STRING_0 || character == STRING_1) {
+        token->type = STRING_0;
+    }
 }
 
 
