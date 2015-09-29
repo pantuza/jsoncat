@@ -71,4 +71,10 @@ struct token
 
 
 
+/* Public function to handle token struct */
+
+void update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
+              char value[DEFAULT_VALUE_LENGTH], int inc_line, int inc_column);
+
+
 #endif // TOKENS_H
