@@ -28,6 +28,6 @@
 
 
 void parse_object (struct token *token, FILE *file, char json[]);
-
+void parse_string (struct token *token, char already_read, FILE *file);
 
 #endif // PARSING_H
