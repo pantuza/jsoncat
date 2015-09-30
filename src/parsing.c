@@ -73,6 +73,9 @@ parse_object (struct token *token, FILE *file, char json[])
 
         parse_string(token, character, file);
         add_token(token, json);
+        parse_object_separator(token, file);
+        add_token(token, json);
+
         fprintf(stdout, json);
     } else {
 
@@ -117,7 +120,7 @@ parse_string (struct token *token, char already_read, FILE *file)
     char character = getc(file);
 
     do {
-        strncat(value, &character, 1);        
+        strncat(value, &character, 2);
 
         if(feof(file)) {
             fprintf(stdout, "Malformed string");
@@ -153,4 +156,21 @@ void
 number ()
 {
     
+}
+
+/*
+ * Separators parser
+ */
+void
+parse_object_separator (struct token *token, FILE *file)
+{
+    char character = getc(file);
+
+    if(character != PAIR_SEPARATOR) {
+        fprintf(stdout, "Expected object separator");
+        exit(EXIT_FAILURE);
+    } else {
+        char value[2] = {character, '\0'};
+        update_token(token, PAIR_SEPARATOR, BROWN, value, 0, 1);
+    }
 }
