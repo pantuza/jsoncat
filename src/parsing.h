@@ -1,5 +1,5 @@
 /*
- * =====================================================================================
+ * ============================================================================
  *
  *       Filename:  parsing.h
  *
@@ -13,7 +13,7 @@
  *         Author:  Gustavo Pantuza, 
  *   Organization:  Software Community
  *
- * =====================================================================================
+ * ============================================================================
  */
 
 
@@ -29,5 +29,7 @@
 
 void parse_object (struct token *token, FILE *file, char json[]);
 void parse_string (struct token *token, char already_read, FILE *file);
+void parse_object_separator(struct token *token, FILE *file);
+
 
 #endif // PARSING_H
