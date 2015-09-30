@@ -27,17 +27,36 @@
 
 
 /*
+ * Prints the json until the error and exits
+ */
+void print_json_error (char json[])
+{
+    fprintf(stdout, json);
+    exit(EXIT_FAILURE);
+}
+
+
+
+/*
  * Print token
  */
 void
-print_token (struct token *token, char json[])
+add_token (struct token *token, char json[])
 {
-    int size = strlen(token->value) + 12;
-    char tmp[size];
+    /* Always there is 2 colors in the string: token->color and NO_COLOR */ 
+    int colors_size = 2 * COLOR_STR_SIZE;
 
-    snprintf(tmp, size, "%s%s%s\n", RED, token->value, NO_COLOR);
-    strncpy(json, tmp, strlen(tmp));
-    fprintf(stdout, json);
+    int size = strlen(token->value) + colors_size;
+    char value[size];
+
+    /* Formats the new value */
+    snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
+    strncat(json, value, strlen(value));
+
+    if(token->type == TOKEN_ERROR)
+    {
+        print_json_error(json);
+    }
 }
 
 /*
@@ -47,11 +66,31 @@ void
 parse_object (struct token *token, FILE *file, char json[])
 { 
 
-    print_token(token, json);
+    add_token(token, json);
     char character = getc(file);
 
     if (character == STRING_0 || character == STRING_1) {
-        token->type = STRING_0;
+
+        parse_string(token, character, file);
+        add_token(token, json);
+        fprintf(stdout, json);
+    } else {
+
+        // TODO: Refactory this lines into a function that makes sense
+        char curr[2] = {character, '\0'};
+        char str[10];
+        fgets(str, 10, file);
+        strncat(curr, str, strlen(str));
+
+        char value[DEFAULT_VALUE_LENGTH];
+        
+        snprintf(value, DEFAULT_VALUE_LENGTH,
+                "\n\t%s%s\n%s%s%s%s%s%c%s%s%s%c%s%s%s%c\n",
+                 GREEN, curr, RED, "Malformed object: ", BROWN, "Expected ",
+                 GRAY, STRING_0, BROWN," or ", GRAY, STRING_1, BROWN, 
+                 " but found ", GRAY, character);
+        update_token(token, TOKEN_ERROR, RED, value, 1, 4);
+        add_token(token, json);
     }
 }
 
@@ -72,9 +111,26 @@ array ()
  * String parser
  */
 void
-string ()
+parse_string (struct token *token, char already_read, FILE *file)
 {
+    char value[DEFAULT_VALUE_LENGTH] = {already_read, '\0'};
+    char character = getc(file);
 
+    do {
+        strncat(value, &character, 1);        
+
+        if(feof(file)) {
+            fprintf(stdout, "Malformed string");
+            exit(EXIT_FAILURE);
+        }
+
+        character = getc(file);
+
+    } while (character != STRING_0 && character != STRING_1);
+
+    strncat(value, &character, 1); 
+
+    update_token(token, STRING_TOKEN, BLUE, value, 1, 4);
 }
 
 
