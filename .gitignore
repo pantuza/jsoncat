@@ -33,3 +33,6 @@
 
 # Binary file
 bin/jsoncat
+
+# Log files
+log/*
