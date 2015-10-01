@@ -77,6 +77,7 @@ parse_object (struct token *token, FILE *file, char json[])
         add_token(token, json);
 
         fprintf(stdout, json);
+        fprintf(stdout, "\nAQUI\n");
     } else {
 
         // TODO: Refactory this lines into a function that makes sense
@@ -116,13 +117,13 @@ array ()
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    char value[DEFAULT_VALUE_LENGTH] = {already_read, '\0'};
+    char value[DEFAULT_VALUE_LENGTH] = {'\n', already_read, '\0'};
     char character = getc(file);
 
     do {
-        strncat(value, &character, 2);
+        strncat(value, &character, 1);
 
-        if(feof(file)) {
+        if(character == EOF) {
             fprintf(stdout, "Malformed string");
             exit(EXIT_FAILURE);
         }
