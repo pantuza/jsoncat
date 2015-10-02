@@ -70,7 +70,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
         { 
             char value[3] = {OBJECT_OPEN, '\n', '\0'};
 
-            update_token(token, OBJECT_OPEN, RED, value, 0, 1);
+            update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
             parse_object(token, file, json);
             break;
         }
