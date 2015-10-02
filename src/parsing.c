@@ -117,7 +117,7 @@ array ()
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    char value[DEFAULT_VALUE_LENGTH] = {'\n', already_read, '\0'};
+    char value[3] = {'\t', already_read, '\0'};
     char character = getc(file);
 
     do {
