@@ -117,11 +117,11 @@ array ()
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    char value[3] = {'\t', already_read, '\0'};
+    char value[DEFAULT_VALUE_LENGTH] = {'\t', already_read, '\0'};
     char character = getc(file);
 
     do {
-        strncat(value, &character, 1);
+        sprintf(value, "%s%c", value, character);
 
         if(character == EOF) {
             fprintf(stdout, "Malformed string");
@@ -132,7 +132,8 @@ parse_string (struct token *token, char already_read, FILE *file)
 
     } while (character != STRING_0 && character != STRING_1);
 
-    strncat(value, &character, 1); 
+    // strncat(value, &character, 1); 
+    sprintf(value, "%s%c", value, character);
 
     update_token(token, STRING_TOKEN, BLUE, value, 1, 4);
 }
