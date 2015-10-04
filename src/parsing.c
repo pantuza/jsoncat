@@ -117,10 +117,19 @@ array ()
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    char value[DEFAULT_VALUE_LENGTH] = {'\t', already_read, '\0'};
+    unsigned int str_size = DEFAULT_VALUE_LENGTH;
+    char value[str_size] = {'\t', already_read, '\0'};
     char character = getc(file);
 
     do {
+        /* If a string is becoming very long we realloc the value variable */
+        if(strlen(value) == str_size) {
+            str_size += DEFAULT_VALUE_LENGTH;
+            if(!realloc(value, str_size)) {
+                fprintf(stderr, RED "Realloc string value error\n" NO_COLOR);
+                exit(EXIT_FAILURE);
+            }
+        }
         sprintf(value, "%s%c", value, character);
 
         if(character == EOF) {
