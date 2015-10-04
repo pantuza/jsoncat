@@ -17,6 +17,9 @@
  */
 
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "tokens.h"
 #include "colors.h"
 #include "string.h"
@@ -60,9 +63,24 @@ set_color (struct token *token, char color[COLOR_STR_SIZE])
  * Sets the token value
  */
 void
-set_value (struct token *token, char value[DEFAULT_VALUE_LENGTH])
+set_value (struct token *token, char value[])
 {
-    strncpy(token->value, value, DEFAULT_VALUE_LENGTH);
+    unsigned int str_len = strlen(value);
+
+    /* 
+     * If the string value is longer than the DEFAULT_VALUE_LENGTH, we realloc
+     * the token value size. 
+     */
+    if(str_len >= DEFAULT_VALUE_LENGTH) {
+        str_len -= DEFAULT_VALUE_LENGTH;
+
+        if(!realloc(token->value, str_len)) {
+            fprintf(stderr, RED "Realloc string size error\n" NO_COLOR);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    strncpy(token->value, value, str_len + 1);
 }
 
 
@@ -72,7 +90,7 @@ set_value (struct token *token, char value[DEFAULT_VALUE_LENGTH])
  */
 void
 update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
-              char value[DEFAULT_VALUE_LENGTH], int inc_l, int inc_c)
+              char value[], int inc_l, int inc_c)
 {
     token->type = type;
 
