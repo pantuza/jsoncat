@@ -38,7 +38,7 @@ void print_json_error (char json[])
 
 
 /*
- * Print token
+ * Prints token value into the result json
  */
 void
 add_token (struct token *token, char json[])
@@ -51,13 +51,15 @@ add_token (struct token *token, char json[])
 
     /* Formats the new value */
     snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
-    strncat(json, value, strlen(value));
 
-    if(token->type == TOKEN_ERROR)
-    {
+    strncat(json, value, size);
+
+    if(token->type == TOKEN_ERROR) {
         print_json_error(json);
     }
 }
+
+
 
 /*
  * Object parser
@@ -117,14 +119,15 @@ array ()
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    unsigned int str_size = DEFAULT_VALUE_LENGTH;
-    char value[str_size] = {'\t', already_read, '\0'};
+    char value[3] = {'\t', already_read, '\0'};
     char character = getc(file);
 
+    unsigned int str_size = DEFAULT_VALUE_LENGTH;
     do {
         /* If a string is becoming very long we realloc the value variable */
         if(strlen(value) == str_size) {
             str_size += DEFAULT_VALUE_LENGTH;
+
             if(!realloc(value, str_size)) {
                 fprintf(stderr, RED "Realloc string value error\n" NO_COLOR);
                 exit(EXIT_FAILURE);
@@ -136,7 +139,6 @@ parse_string (struct token *token, char already_read, FILE *file)
             fprintf(stdout, "Malformed string");
             exit(EXIT_FAILURE);
         }
-
         character = getc(file);
 
     } while (character != STRING_0 && character != STRING_1);
