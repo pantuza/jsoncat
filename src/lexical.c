@@ -109,8 +109,7 @@ start_parsing (options_t* options)
     /*
      *  The well formatted json
      */
-    char json[] = "";
-
+    char json[2048];
 
     FILE *file = open_json_file(options->file_name);
 
