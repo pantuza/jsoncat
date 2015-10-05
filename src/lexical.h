@@ -20,11 +20,17 @@
 #define LEXICAL_H
 
 
+#include <stdio.h>
+
+#include "tokens.h"
 #include "args.h"
 
 
+
 /* Public functions of the lexical analyser */
-void start_parsing (options_t* options);
+void start_parsing (options_t* options, char json[]);
+void match_symbol(char character, struct token *token,
+                  FILE *file, char json[]);
 
 
 #endif // LEXICAL_H
