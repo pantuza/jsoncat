@@ -114,7 +114,7 @@ valgrind:
 
 # Rule to run the resulted binary file
 run: $(BINDIR)/$(BINARY)
-	@./$^
+	@./$^ $(TESTSDIR)/samples/input_06.json
 
 # Rule for cleaning the project
 clean:
