@@ -40,7 +40,17 @@ main (int argc, char* argv[])
     fprintf(stdout, BROWN "use colors: %d\n" NO_COLOR, options.use_colors);
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
 
-    start_parsing(&options);
+    /*
+     *  The well formatted json
+     */
+    char json[2048];
+
+    start_parsing(&options, json);
+
+    /*
+     * Prints the resulted json
+     */
+    fprintf(stdout, "%s", json);
 
     return EXIT_SUCCESS;
 }
