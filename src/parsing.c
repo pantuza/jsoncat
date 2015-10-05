@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "lexical.h"
 #include "parsing.h"
 #include "colors.h"
 #include "tokens.h"
@@ -31,7 +32,7 @@
  */
 void print_json_error (char json[])
 {
-    fprintf(stdout, json);
+    fprintf(stdout, "%s", json);
     exit(EXIT_FAILURE);
 }
 
@@ -51,7 +52,6 @@ add_token (struct token *token, char json[])
 
     /* Formats the new value */
     snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
-
     strncat(json, value, size);
 
     if(token->type == TOKEN_ERROR) {
@@ -75,11 +75,13 @@ parse_object (struct token *token, FILE *file, char json[])
 
         parse_string(token, character, file);
         add_token(token, json);
+
         parse_object_separator(token, file);
         add_token(token, json);
 
-        fprintf(stdout, json);
-        fprintf(stdout, "\nAQUI\n");
+        character = getc(file);
+        match_symbol(character, token, file, json);
+
     } else {
 
         // TODO: Refactory this lines into a function that makes sense
@@ -106,7 +108,7 @@ parse_object (struct token *token, FILE *file, char json[])
  * Array parser 
  */
 void
-array ()
+parse_array (struct token *token, FILE *file, char json[])
 {
 
 }
