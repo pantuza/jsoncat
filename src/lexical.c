@@ -74,6 +74,19 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             parse_object(token, file, json);
             break;
         }
+
+        case ARRAY_OPEN:
+        {
+            char value[3] = {ARRAY_OPEN, '\n', '\0'};
+
+            update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
+            parse_array(token, file, json);
+            break;
+        }
+
+        case STRING_0:
+        case STRING_1:
+            break;
     }
 }
 
@@ -103,13 +116,8 @@ find_token (FILE *file, struct token *token, char json[])
  * Starts the parsing by doing the lexical analysis
  */
 void
-start_parsing (options_t* options)
+start_parsing (options_t* options, char json[])
 {
-
-    /*
-     *  The well formatted json
-     */
-    char json[2048];
 
     FILE *file = open_json_file(options->file_name);
 
