@@ -62,6 +62,37 @@ add_token (struct token *token, char json[])
 
 
 /*
+ * Prints an error when a malformed object is found
+ */
+void
+object_error(struct token *token, FILE *file, char json[], char character)
+{
+    /* Given the current character, gets the next 10 chars for pretty print */
+    char curr[2] = {character, '\0'};
+    char str[10];
+    fgets(str, 10, file);
+    strncat(curr, str, strlen(str));
+
+    /* The error value to be printed */
+    char value[DEFAULT_VALUE_LENGTH];
+    
+    /* Format error string */
+    snprintf(value, DEFAULT_VALUE_LENGTH,
+            "\n\t%s%s\n%s%s%s%s%s%c%s%s%s%c%s%s%s%c\n",
+             GREEN, curr, RED, "Malformed object: ", BROWN, "Expected ",
+             GRAY, STRING_0, BROWN," or ", GRAY, STRING_1, BROWN, 
+             " but found ", GRAY, character);
+
+    /* Updates token with the token type TOKEN_ERROR */
+    update_token(token, TOKEN_ERROR, RED, value, 1, 4);
+
+    /* Adds token to json. It will print the error and exit with failure */
+    add_token(token, json);
+}
+
+
+
+/*
  * Object parser
  */
 void
@@ -83,22 +114,8 @@ parse_object (struct token *token, FILE *file, char json[])
         match_symbol(character, token, file, json);
 
     } else {
-
-        // TODO: Refactory this lines into a function that makes sense
-        char curr[2] = {character, '\0'};
-        char str[10];
-        fgets(str, 10, file);
-        strncat(curr, str, strlen(str));
-
-        char value[DEFAULT_VALUE_LENGTH];
-        
-        snprintf(value, DEFAULT_VALUE_LENGTH,
-                "\n\t%s%s\n%s%s%s%s%s%c%s%s%s%c%s%s%s%c\n",
-                 GREEN, curr, RED, "Malformed object: ", BROWN, "Expected ",
-                 GRAY, STRING_0, BROWN," or ", GRAY, STRING_1, BROWN, 
-                 " but found ", GRAY, character);
-        update_token(token, TOKEN_ERROR, RED, value, 1, 4);
-        add_token(token, json);
+        /* Malformed object */
+        object_error(token, file, json, character);
     }
 }
 
