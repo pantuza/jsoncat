@@ -68,10 +68,11 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
 
         case OBJECT_OPEN:
         { 
-            char value[4] = {OBJECT_OPEN, '\n', '\t', '\0'};
+            parse_object(token);
+            add_token(token, json);
 
-            update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
-            parse_object(token, file, json);
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
             break;
         }
 
@@ -101,7 +102,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             char value[3] = {ARRAY_OPEN, '\n', '\0'};
 
             update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
-            parse_array(token, file, json);
+            parse_array(token);
             break;
         }
 
