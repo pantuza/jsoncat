@@ -104,13 +104,10 @@ parse_object (struct token *token, FILE *file, char json[])
 
     if (character == STRING_0 || character == STRING_1) {
 
-        parse_string(token, character, file);
-        add_token(token, json);
+        //parse_string(token, character, file);
+        //add_token(token, json);
 
-        parse_object_separator(token, file);
-        add_token(token, json);
-
-        character = getc(file);
+        //character = getc(file);
         match_symbol(character, token, file, json);
 
     } else {
@@ -190,19 +187,26 @@ number ()
     
 }
 
+
+
 /*
  * Separators parser
  */
 void
-parse_object_separator (struct token *token, FILE *file)
+parse_pair_separator (struct token *token)
 {
-    char character = getc(file);
+    char value[3] = {PAIR_SEPARATOR, ' ', '\0'};
+    update_token(token, PAIR_SEPARATOR, BROWN, value, 0, 1);
+}
 
-    if(character != PAIR_SEPARATOR) {
-        fprintf(stdout, "Expected object separator");
-        exit(EXIT_FAILURE);
-    } else {
-        char value[2] = {character, '\0'};
-        update_token(token, PAIR_SEPARATOR, BROWN, value, 0, 1);
-    }
+
+
+/*
+ * Value separator parser
+ */
+void
+parse_value_separator (struct token *token)
+{
+    char value[4] = {VALUE_SEPARATOR, '\n', '\t', '\0'};
+    update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
 }
