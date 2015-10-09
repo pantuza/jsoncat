@@ -110,7 +110,8 @@ parse_object (struct token *token)
 void
 parse_array (struct token *token)
 {
-
+    char value[3] = {ARRAY_OPEN, ' ', '\0'};
+    update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
 }
 
 
