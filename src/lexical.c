@@ -86,7 +86,14 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
 
         case STRING_0:
         case STRING_1:
+        { 
+            parse_string(token, character, file);
+            add_token(token, json);
+
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
             break;
+        }
     }
 }
 
