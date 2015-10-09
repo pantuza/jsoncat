@@ -75,6 +75,17 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             break;
         }
 
+        case VALUE_SEPARATOR:
+        {
+            char value[4] = {VALUE_SEPARATOR, '\n', '\t', '\0'};
+            update_token(token, VALUE_SEPARATOR, GREEN, value, 1, 0);
+            add_token(token, json);
+
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
+            break;
+        }
+
         case OBJECT_CLOSE:
         {
             char value[3] = {'\n', OBJECT_CLOSE, '\0'};
