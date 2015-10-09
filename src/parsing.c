@@ -96,24 +96,10 @@ object_error(struct token *token, FILE *file, char json[], char character)
  * Object parser
  */
 void
-parse_object (struct token *token, FILE *file, char json[])
+parse_object (struct token *token)
 { 
-
-    add_token(token, json);
-    char character = getc(file);
-
-    if (character == STRING_0 || character == STRING_1) {
-
-        //parse_string(token, character, file);
-        //add_token(token, json);
-
-        //character = getc(file);
-        match_symbol(character, token, file, json);
-
-    } else {
-        /* Malformed object */
-        object_error(token, file, json, character);
-    }
+    char value[4] = {OBJECT_OPEN, '\n', '\t', '\0'};
+    update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
 }
 
 
@@ -122,7 +108,7 @@ parse_object (struct token *token, FILE *file, char json[])
  * Array parser 
  */
 void
-parse_array (struct token *token, FILE *file, char json[])
+parse_array (struct token *token)
 {
 
 }
