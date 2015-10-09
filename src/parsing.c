@@ -138,7 +138,7 @@ parse_array (struct token *token, FILE *file, char json[])
 void
 parse_string (struct token *token, char already_read, FILE *file)
 {
-    char value[3] = {'\t', already_read, '\0'};
+    char value[2] = {already_read, '\0'};
     char character = getc(file);
 
     unsigned int str_size = DEFAULT_VALUE_LENGTH;
