@@ -19,11 +19,23 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "lexical.h"
 #include "parsing.h"
 #include "colors.h"
 #include "tokens.h"
+
+
+/*
+ * Prints the json until the error and exits
+ */
+void
+print_json_error (char json[])
+{
+    fprintf(stdout, "%s", json);
+    exit(EXIT_FAILURE);
+}
 
 
 
@@ -127,9 +139,18 @@ constant ()
  * Number parser
  */
 void
-number ()
+parse_number (struct token *token, char character, FILE *file)
 {
-    
+    char value[2] = {character, '\0'};
+    char next_char = getc(file);
+
+    while(isdigit(next_char)) {
+        strncat(value, &next_char, sizeof(char));
+        next_char = getc(file);
+    }
+
+    ungetc(next_char, file);
+    update_token(token, NUMBER, GREEN, value, 0, 1);
 }
 
 
