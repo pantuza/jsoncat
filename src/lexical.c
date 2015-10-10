@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ctype.h>
 
 #include "tokens.h"
 #include "colors.h"
@@ -57,6 +57,19 @@ open_json_file (char filename[])
 
 
 /*
+ * Check if we found a number
+ */
+void
+check_number(char *character)
+{
+    if(isdigit(*character)) {
+        *character = (char) NUMBER;
+    }
+}
+
+
+
+/*
  * Function to identify if the token represents any valid Json symbol.
  * If it matches a symbol, the symbol parser is called. Otherwise
  * the program exits with errors
@@ -64,6 +77,9 @@ open_json_file (char filename[])
 void
 match_symbol(char character, struct token *token, FILE *file, char json[])
 {
+    char char_cpy = character;
+    check_number(&character);
+
     switch (character) {
 
         case OBJECT_OPEN:
@@ -132,6 +148,16 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
         case STRING_1:
         { 
             parse_string(token, character, file);
+            add_token(token, json);
+
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
+            break;
+        }
+
+        case ((char) NUMBER):
+        {
+            parse_number(token, char_cpy, file);
             add_token(token, json);
 
             char next_char = getc(file);
