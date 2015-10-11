@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
 
 #include "tokens.h"
 #include "colors.h"
@@ -46,8 +47,8 @@ open_json_file (char filename[])
     }
     
     if (!file) {
-        fprintf(stderr, RED "Error on openning file '%s'\n" NO_COLOR,
-                filename);
+        fprintf(stderr, RED "Error on openning file '%s': %s\n" NO_COLOR,
+                filename, strerror(errno));
         exit(EXIT_FAILURE);
     }
 
