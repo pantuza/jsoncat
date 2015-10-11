@@ -34,11 +34,13 @@ main (int argc, char* argv[])
     options_t options;
     jsoncat_options_parser(argc, argv, &options);
 
+#ifdef DEBUG
     fprintf(stdout, BLUE "Command line options:\n" NO_COLOR);
     fprintf(stdout, BROWN "help: %d\n" NO_COLOR, options.help);
     fprintf(stdout, BROWN "version: %d\n" NO_COLOR, options.version);
     fprintf(stdout, BROWN "use colors: %d\n" NO_COLOR, options.use_colors);
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
+#endif
 
     /*
      *  The well formatted json
@@ -46,11 +48,10 @@ main (int argc, char* argv[])
     char json[2048];
 
     start_parsing(&options, json);
-
     /*
      * Prints the resulted json
      */
-    fprintf(stdout, "%s", json);
+    fprintf(stdout, "%s\n", json);
 
     return EXIT_SUCCESS;
 }
