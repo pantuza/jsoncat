@@ -109,7 +109,7 @@ parse_string (struct token *token, char already_read, FILE *file)
         sprintf(value, "%s%c", value, character);
 
         if(character == EOF) {
-            fprintf(stdout, "Malformed string");
+            fprintf(stdout, RED "Malformed string\n" NO_COLOR);
             exit(EXIT_FAILURE);
         }
         character = getc(file);
