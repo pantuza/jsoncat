@@ -33,6 +33,8 @@ void parse_string (struct token *token, char already_read, FILE *file);
 void parse_pair_separator (struct token *token);
 void parse_value_separator (struct token *token);
 void parse_number (struct token *token, char character, FILE *file);
+void parse_true_token (struct token *token, char character, FILE *file);
+
 void add_token (struct token *token, char json[]);
 
 
