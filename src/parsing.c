@@ -128,9 +128,23 @@ parse_string (struct token *token, char already_read, FILE *file)
  * Constant values parser
  */
 void
-constant ()
+parse_true_token (struct token *token, char character, FILE *file)
 {
+    unsigned int true_str_size = 4;
+    char value[] = "true";
 
+    int i;
+    char next_char;
+    for(i = 1; i < true_str_size; i++) {
+
+        next_char = getc(file);
+        if(!(next_char == value[i])) {
+            fprintf(stderr, "Error on parsing the 'true' token value\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    update_token(token, TRUE_VALUE, RED, value, 0, 4);
 }
 
 
