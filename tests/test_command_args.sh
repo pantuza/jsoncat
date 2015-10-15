@@ -71,7 +71,7 @@ assert_command ()
         N_FAILED=$((N_FAILED + 1));
     fi;
     # Will sleep just for pretty print the tests
-    sleep 0.5;
+    sleep 0.2;
 }
 
 
