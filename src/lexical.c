@@ -168,7 +168,27 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
 
         case 't':
         {
-            parse_true_token(token, character, file);
+            parse_true_token(token, file);
+            add_token(token, json);
+
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
+            break;
+        }
+        
+        case 'f':
+        {
+            parse_false_token(token, file);
+            add_token(token, json);
+
+            char next_char = getc(file);
+            match_symbol(next_char, token, file, json);
+            break;
+        }
+        
+        case 'n':
+        {
+            parse_null_token(token, file);
             add_token(token, json);
 
             char next_char = getc(file);
