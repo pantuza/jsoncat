@@ -172,6 +172,15 @@ assert_command_fail $?;
 
 
 #
+# Tests a valid json input file
+#
+test_message "Parse a valid json input file";
+./${BINDIR}/${BINARY} "tests/samples/input_06.json" &> ${LIMBO};
+assert_command $?;
+
+
+
+#
 # Prints the results of the tests
 #
 echo -en "${BROWN}--${END_COLOR}\n\n";
