@@ -4,6 +4,9 @@
 #
 #
 
+# Shell program
+SHELL := bash
+
 
 # Gets from shell the operating system
 OS := $(shell uname -s)
@@ -122,3 +125,10 @@ clean:
 	@rm -rvf $(BINDIR)/*;
 	@rm -rvf $(LIBDIR)/*;
 	@rm -rvf $(LOGDIR)/*;
+
+# Rule to run the project tests
+test: command_line_test
+
+# Rule to run the command line arguments tests
+command_line_test: $(TESTSDIR)/test_command_args.sh
+	$(SHELL) $^
