@@ -83,7 +83,7 @@ assert_command_fail ()
     if [ "$1" -ne "0" ]; then
         assert_command "0"; # Success
     else
-        assert_command "$1";
+        assert_command "1"; # Fail
     fi;
 }
 
