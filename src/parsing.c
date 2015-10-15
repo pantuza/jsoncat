@@ -90,34 +90,27 @@ parse_array (struct token *token)
  * String parser
  */
 void
-parse_string (struct token *token, char already_read, FILE *file)
+parse_string (struct token *token, char already_read,
+              char value[DEFAULT_VALUE_LENGTH], FILE *file)
 {
-    char value[2] = {already_read, '\0'};
+    value[0] = already_read;
+    value[1] = '\0';
+
     char character = getc(file);
 
-    unsigned int str_size = DEFAULT_VALUE_LENGTH;
     do {
-        /* If a string is becoming very long we realloc the value variable */
-        if(strlen(value) == str_size) {
-            str_size += DEFAULT_VALUE_LENGTH;
-
-            if(!realloc(value, str_size)) {
-                fprintf(stderr, RED "Realloc string value error\n" NO_COLOR);
-                exit(EXIT_FAILURE);
-            }
-        }
-        sprintf(value, "%s%c", value, character);
+        strncat(value, &character, 1); 
 
         if(character == EOF) {
             fprintf(stdout, RED "Malformed string\n" NO_COLOR);
             exit(EXIT_FAILURE);
         }
+
         character = getc(file);
 
     } while (character != STRING_0 && character != STRING_1);
 
-    // strncat(value, &character, 1); 
-    sprintf(value, "%s%c", value, character);
+    strncat(value, &character, 1); 
 
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
