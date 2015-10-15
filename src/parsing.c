@@ -119,21 +119,21 @@ parse_string (struct token *token, char already_read, FILE *file)
     // strncat(value, &character, 1); 
     sprintf(value, "%s%c", value, character);
 
-    update_token(token, STRING_TOKEN, BLUE, value, 1, 4);
+    update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 
 
 
 /*
- * Constant values parser
+ * true constant value parser
  */
 void
-parse_true_token (struct token *token, char character, FILE *file)
+parse_true_token (struct token *token, FILE *file)
 {
     unsigned int true_str_size = 4;
     char value[] = "true";
 
-    int i;
+    unsigned int i;
     char next_char;
     for(i = 1; i < true_str_size; i++) {
 
@@ -145,6 +145,56 @@ parse_true_token (struct token *token, char character, FILE *file)
     }
 
     update_token(token, TRUE_VALUE, RED, value, 0, 4);
+}
+
+
+
+/*
+ * false constant value parser
+ */
+void
+parse_false_token (struct token *token, FILE *file)
+{
+    unsigned int false_str_size = 5;
+    char value[] = "false";
+
+    unsigned int i;
+    char next_char;
+    for(i = 1; i < false_str_size; i++) {
+
+        next_char = getc(file);
+        if(!(next_char == value[i])) {
+            fprintf(stderr, "Error on parsing the 'false' token value\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    update_token(token, FALSE_VALUE, RED, value, 0, 4);
+}
+
+
+
+/*
+ * null constant value parser
+ */
+void
+parse_null_token (struct token *token, FILE *file)
+{
+    unsigned int null_str_size = 4;
+    char value[] = "null";
+
+    unsigned int i;
+    char next_char;
+    for(i = 1; i < null_str_size; i++) {
+
+        next_char = getc(file);
+        if(!(next_char == value[i])) {
+            fprintf(stderr, "Error on parsing the 'null' token value\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    update_token(token, NULL_VALUE, RED, value, 0, 4);
 }
 
 
@@ -164,7 +214,7 @@ parse_number (struct token *token, char character, FILE *file)
     }
 
     ungetc(next_char, file);
-    update_token(token, NUMBER, GREEN, value, 0, 1);
+    update_token(token, NUMBER, RED, value, 0, 1);
 }
 
 
