@@ -160,7 +160,8 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
         case '-':
         case ((char) NUMBER):
         {
-            parse_number(token, char_cpy, file);
+            char value[DEFAULT_VALUE_LENGTH];
+            parse_number(token, char_cpy, value, file);
             add_token(token, json);
 
             char next_char = getc(file);
