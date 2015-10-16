@@ -100,3 +100,38 @@ update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
     set_color(token, color);
     set_value(token, value);
 }
+
+
+
+/*
+ * Prints the json until the error and exits
+ */
+void
+print_json_error (char json[])
+{
+    fprintf(stdout, "%s", json);
+    exit(EXIT_FAILURE);
+}
+
+
+
+/*
+ * Prints token value into the result json
+ */
+void
+add_token (struct token *token, char json[])
+{
+    /* Always there is 2 colors in the string: token->color and NO_COLOR */ 
+    int colors_size = 2 * COLOR_STR_SIZE;
+
+    int size = strlen(token->value) + colors_size;
+    char value[size];
+
+    /* Formats the new value */
+    snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
+    strncat(json, value, size);
+
+    if(token->type == TOKEN_ERROR) {
+        print_json_error(json);
+    }
+}

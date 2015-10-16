@@ -39,7 +39,5 @@ void parse_true_token (struct token *token, FILE *file);
 void parse_false_token (struct token *token, FILE *file);
 void parse_null_token (struct token *token, FILE *file);
 
-void add_token (struct token *token, char json[]);
-
 
 #endif // PARSING_H
