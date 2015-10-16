@@ -33,7 +33,8 @@ void parse_string (struct token *token, char already_read,
                    char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_pair_separator (struct token *token);
 void parse_value_separator (struct token *token);
-void parse_number (struct token *token, char character, FILE *file);
+void parse_number (struct token *token, char character,
+                   char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_true_token (struct token *token, FILE *file);
 void parse_false_token (struct token *token, FILE *file);
 void parse_null_token (struct token *token, FILE *file);
