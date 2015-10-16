@@ -192,15 +192,45 @@ parse_null_token (struct token *token, FILE *file)
 
 
 /*
+ * Get valid number value
+ */
+bool
+is_part_of_a_number(char character) 
+{
+    switch (character) {
+
+        case '.':
+        case 'e':
+        case 'E':
+        case '+':
+        case '-':
+            return true;
+
+        default:
+            if(isdigit(character)) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+}
+
+
+
+/*
  * Number parser
  */
 void
-parse_number (struct token *token, char character, FILE *file)
+parse_number (struct token *token, char character,
+              char value[DEFAULT_VALUE_LENGTH], FILE *file)
 {
-    char value[2] = {character, '\0'};
+    value[0] = character;
+    value[1] = '\0';
+
     char next_char = getc(file);
 
-    while(isdigit(next_char)) {
+    while(is_part_of_a_number(next_char)) {
+
         strncat(value, &next_char, sizeof(char));
         next_char = getc(file);
     }
