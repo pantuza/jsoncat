@@ -111,7 +111,6 @@ parse_string (struct token *token, char already_read,
     } while (character != STRING_0 && character != STRING_1);
 
     strncat(value, &character, 1); 
-
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 

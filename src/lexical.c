@@ -157,6 +157,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             break;
         }
 
+        case '-':
         case ((char) NUMBER):
         {
             parse_number(token, char_cpy, file);
