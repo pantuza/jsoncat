@@ -90,27 +90,27 @@ parse_array (struct token *token)
  * String parser
  */
 void
-parse_string (struct token *token, char already_read,
+parse_string (struct token *token, char character,
               char value[DEFAULT_VALUE_LENGTH], FILE *file)
 {
-    value[0] = already_read;
+    value[0] = character;
     value[1] = '\0';
 
-    char character = getc(file);
+    char next_char = getc(file);
 
     do {
-        strncat(value, &character, 1); 
+        strncat(value, &next_char, 1); 
 
-        if(character == EOF) {
+        if(next_char == EOF) {
             fprintf(stdout, RED "Malformed string\n" NO_COLOR);
             exit(EXIT_FAILURE);
         }
 
-        character = getc(file);
+        next_char = getc(file);
 
-    } while (character != STRING_0 && character != STRING_1);
+    } while (next_char != STRING_0 && next_char != STRING_1);
 
-    strncat(value, &character, 1); 
+    strncat(value, &next_char, 1); 
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 

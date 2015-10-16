@@ -29,7 +29,7 @@
 
 void parse_object (struct token *token);
 void parse_array (struct token *token);
-void parse_string (struct token *token, char already_read,
+void parse_string (struct token *token, char character,
                    char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_pair_separator (struct token *token);
 void parse_value_separator (struct token *token);
