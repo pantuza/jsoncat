@@ -77,7 +77,7 @@ check_number(char *character)
  */
 void
 match_symbol(char character, struct token *token, FILE *file,
-             char json[], int n_tabs)
+             char json[], int *n_tabs)
 {
     char char_cpy = character;
     check_number(&character);
@@ -87,7 +87,8 @@ match_symbol(char character, struct token *token, FILE *file,
         case OBJECT_OPEN:
         {
             char value[DEFAULT_VALUE_LENGTH];
-            parse_object(token, value, ++n_tabs);
+            *n_tabs += 1;
+            parse_object(token, value, *n_tabs);
             add_token(token, json);
 
             char next_char = getc(file);
@@ -107,14 +108,15 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case OBJECT_CLOSE:
         {
-            char value[] = ""; 
+            char value[] = "\n"; 
             int i = 0;
-            if(--n_tabs > 0) {
-                for(; i < n_tabs; i++) {
+            *n_tabs -= 1;
+            if(*n_tabs > 0) {
+                for(; i < *n_tabs; i++) {
                     strncat(value, "\t", sizeof(char));
                 }
             }
-            char to_append[3] = {'\n', OBJECT_CLOSE, '\0'};
+            char to_append[2] = {OBJECT_CLOSE, '\0'};
             strncat(value, to_append, strlen(to_append));
 
             update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
@@ -137,7 +139,8 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case VALUE_SEPARATOR:
         {
-            parse_value_separator(token);
+            char value[DEFAULT_VALUE_LENGTH];
+            parse_value_separator(token, value, *n_tabs);
             add_token(token, json);
 
             char next_char = getc(file);
@@ -228,7 +231,7 @@ find_token (FILE *file, struct token *token, char json[])
         character = getc(file);
 
         /* matches the token with an Json symbol */
-        match_symbol(character, token, file, json, n_tabs);
+        match_symbol(character, token, file, json, &n_tabs);
 
     } while (character != EOF);
 }
