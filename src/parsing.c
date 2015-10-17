@@ -73,7 +73,8 @@ parse_string (struct token *token, char character,
 
     char next_char = getc(file);
 
-    do {
+    while (next_char != character)
+    {
         strncat(value, &next_char, 1); 
 
         if(next_char == EOF) {
@@ -82,10 +83,9 @@ parse_string (struct token *token, char character,
         }
 
         next_char = getc(file);
-
-    } while (next_char != STRING_0 && next_char != STRING_1);
-
+    }
     strncat(value, &next_char, 1); 
+
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 
@@ -106,7 +106,8 @@ parse_true_token (struct token *token, FILE *file)
 
         next_char = getc(file);
         if(!(next_char == value[i])) {
-            fprintf(stderr, "Error on parsing the 'true' token value\n");
+            fprintf(stderr, RED "Error on parsing the 'true' token value\n"
+                    NO_COLOR);
             exit(EXIT_FAILURE);
         }
     }
@@ -131,7 +132,8 @@ parse_false_token (struct token *token, FILE *file)
 
         next_char = getc(file);
         if(!(next_char == value[i])) {
-            fprintf(stderr, "Error on parsing the 'false' token value\n");
+            fprintf(stderr, RED "Error on parsing the 'false' token value\n" 
+                    NO_COLOR);
             exit(EXIT_FAILURE);
         }
     }
@@ -156,7 +158,8 @@ parse_null_token (struct token *token, FILE *file)
 
         next_char = getc(file);
         if(!(next_char == value[i])) {
-            fprintf(stderr, "Error on parsing the 'null' token value\n");
+            fprintf(stderr, RED "Error on parsing the 'null' token value\n"
+                    NO_COLOR);
             exit(EXIT_FAILURE);
         }
     }
