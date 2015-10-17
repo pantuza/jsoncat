@@ -31,9 +31,19 @@
  * Object parser
  */
 void
-parse_object (struct token *token)
+parse_object(struct token *token, char value[DEFAULT_VALUE_LENGTH], int n_tabs)
 { 
-    char value[4] = {OBJECT_OPEN, '\n', '\t', '\0'};
+    value[0] = OBJECT_OPEN;
+    value[1] = '\n';
+    value[2] = '\0';
+
+    int i = 0;
+    if(n_tabs > 0) {
+        for(; i < n_tabs; i++) {
+            strncat(value, "\t", sizeof(char));
+        }
+    }
+
     update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
 }
 
@@ -224,6 +234,6 @@ parse_pair_separator (struct token *token)
 void
 parse_value_separator (struct token *token)
 {
-    char value[4] = {VALUE_SEPARATOR, '\n', '\t', '\0'};
+    char value[3] = {VALUE_SEPARATOR, '\n', '\0'};
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
 }

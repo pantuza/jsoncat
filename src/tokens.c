@@ -127,6 +127,7 @@ add_token (struct token *token, char json[])
     int size = strlen(token->value) + colors_size;
     char value[size];
 
+
     /* Formats the new value */
     snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
     strncat(json, value, size);
