@@ -76,7 +76,8 @@ check_number(char *character)
  * the program exits with errors
  */
 void
-match_symbol(char character, struct token *token, FILE *file, char json[])
+match_symbol(char character, struct token *token, FILE *file,
+             char json[], int n_tabs)
 {
     char char_cpy = character;
     check_number(&character);
@@ -84,12 +85,13 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
     switch (character) {
 
         case OBJECT_OPEN:
-        { 
-            parse_object(token);
+        {
+            char value[DEFAULT_VALUE_LENGTH];
+            parse_object(token, value, ++n_tabs);
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -99,18 +101,27 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
         case OBJECT_CLOSE:
         {
-            char value[3] = {'\n', OBJECT_CLOSE, '\0'};
+            char value[] = ""; 
+            int i = 0;
+            if(--n_tabs > 0) {
+                for(; i < n_tabs; i++) {
+                    strncat(value, "\t", sizeof(char));
+                }
+            }
+            char to_append[3] = {'\n', OBJECT_CLOSE, '\0'};
+            strncat(value, to_append, strlen(to_append));
+
             update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -120,7 +131,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -130,7 +141,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -141,7 +152,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -153,7 +164,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -165,7 +176,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
 
@@ -175,7 +186,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
         
@@ -185,7 +196,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
         
@@ -195,7 +206,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
             add_token(token, json);
 
             char next_char = getc(file);
-            match_symbol(next_char, token, file, json);
+            match_symbol(next_char, token, file, json, n_tabs);
             break;
         }
     }
@@ -209,6 +220,7 @@ match_symbol(char character, struct token *token, FILE *file, char json[])
 void
 find_token (FILE *file, struct token *token, char json[])
 {
+    int n_tabs = 0;
     char character;
 
     do {
@@ -216,7 +228,7 @@ find_token (FILE *file, struct token *token, char json[])
         character = getc(file);
 
         /* matches the token with an Json symbol */
-        match_symbol(character, token, file, json);
+        match_symbol(character, token, file, json, n_tabs);
 
     } while (character != EOF);
 }
