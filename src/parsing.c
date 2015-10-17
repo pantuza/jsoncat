@@ -232,8 +232,19 @@ parse_pair_separator (struct token *token)
  * Value separator parser
  */
 void
-parse_value_separator (struct token *token)
+parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
+                       int n_tabs)
 {
-    char value[3] = {VALUE_SEPARATOR, '\n', '\0'};
+    value[0] = VALUE_SEPARATOR;
+    value[1] = '\n';
+    value[2] = '\0';
+
+    int i = 0;
+    if(n_tabs > 0) {
+        for(; i < n_tabs; i++) {
+            strncat(value, "\t", sizeof(char));
+        }
+    }
+
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
 }
