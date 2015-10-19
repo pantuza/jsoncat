@@ -44,5 +44,8 @@ main (int argc, char* argv[])
 
     start_parsing(&options);
 
+    /* Forces a line break at and of the json print */
+    fprintf(stdout, "\n");
+
     return EXIT_SUCCESS;
 }
