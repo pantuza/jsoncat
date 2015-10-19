@@ -242,7 +242,7 @@ find_token (FILE *file, struct token *token, char json[])
  * Starts the parsing by doing the lexical analysis
  */
 void
-start_parsing (options_t* options, char json[])
+start_parsing (options_t* options)
 {
 
     FILE *file = open_json_file(options->file_name);
@@ -250,6 +250,6 @@ start_parsing (options_t* options, char json[])
     struct token token;
     token.line = 0;
     token.column = 0;
-
+    char json[1024];
     find_token(file, &token, json);
 }

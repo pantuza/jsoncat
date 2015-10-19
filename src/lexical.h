@@ -28,7 +28,7 @@
 
 
 /* Public functions of the lexical analyser */
-void start_parsing (options_t* options, char json[]);
+void start_parsing (options_t* options);
 void match_symbol(char character, struct token *token,
                   FILE *file, char json[], int *n_tabs);
 
