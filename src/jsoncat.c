@@ -42,16 +42,7 @@ main (int argc, char* argv[])
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
 #endif
 
-    /*
-     *  The well formatted json
-     */
-    char json[2048];
-
-    start_parsing(&options, json);
-    /*
-     * Prints the resulted json
-     */
-    fprintf(stdout, "%s\n", json);
+    start_parsing(&options);
 
     return EXIT_SUCCESS;
 }
