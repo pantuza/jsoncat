@@ -89,7 +89,7 @@ match_symbol(char character, struct token *token, FILE *file,
             char value[DEFAULT_VALUE_LENGTH];
             *n_tabs += 1;
             parse_object(token, value, *n_tabs);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -99,7 +99,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case PAIR_SEPARATOR:
         {
             parse_pair_separator(token);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -120,7 +120,7 @@ match_symbol(char character, struct token *token, FILE *file,
             strncat(value, to_append, strlen(to_append));
 
             update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -130,7 +130,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case ARRAY_OPEN:
         {
             parse_array(token);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -141,7 +141,7 @@ match_symbol(char character, struct token *token, FILE *file,
         {
             char value[DEFAULT_VALUE_LENGTH];
             parse_value_separator(token, value, *n_tabs);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -152,7 +152,7 @@ match_symbol(char character, struct token *token, FILE *file,
         {
             char value[3] = {ARRAY_CLOSE, '\n', '\0'};
             update_token(token, ARRAY_CLOSE, GRAY, value, 1, 0);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -164,7 +164,7 @@ match_symbol(char character, struct token *token, FILE *file,
         { 
             char value[DEFAULT_VALUE_LENGTH];
             parse_string(token, character, value, file);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -176,7 +176,7 @@ match_symbol(char character, struct token *token, FILE *file,
         {
             char value[DEFAULT_VALUE_LENGTH];
             parse_number(token, char_cpy, value, file);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -186,7 +186,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case 't':
         {
             parse_true_token(token, file);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -196,7 +196,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case 'f':
         {
             parse_false_token(token, file);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
@@ -206,7 +206,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case 'n':
         {
             parse_null_token(token, file);
-            add_token(token, json);
+            add_token(token);
 
             char next_char = getc(file);
             match_symbol(next_char, token, file, json, n_tabs);
