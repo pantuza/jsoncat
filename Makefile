@@ -127,8 +127,12 @@ clean:
 	@rm -rvf $(LOGDIR)/*;
 
 # Rule to run the project tests
-test: command_line_test
+test: command_line_test samples_test
 
 # Rule to run the command line arguments tests
 command_line_test: $(TESTSDIR)/command_args.sh
+	$(SHELL) $^
+
+# Rule to run samples parsing test
+samples_test: $(TESTSDIR)/samples.sh
 	$(SHELL) $^
