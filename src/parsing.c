@@ -50,6 +50,42 @@ parse_object(struct token *token, char value[DEFAULT_VALUE_LENGTH], int n_tabs)
 
 
 /*
+ * Parse the object close token
+ */
+void
+parse_object_close(struct token *token, int *n_tabs) 
+{
+    /* Allocates the default value size */
+    char *value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+    strncpy(value, "\n\0", 2);
+
+    *n_tabs -= 1;
+    int i;
+    /* Fill value with tab characters for identation */
+    if(*n_tabs > 0)
+        for(i = 0; i < *n_tabs; i++)
+            strncat(value, "\t", sizeof(char));
+
+    
+    char to_append[2] = {OBJECT_CLOSE, '\0'};
+
+    /* If necessary, we realloc the string */
+    int new_value_size = (strlen(value) + strlen(to_append));
+    int div = (int) (new_value_size % DEFAULT_VALUE_LENGTH);
+
+    if(div > 0) { /* Calculates the reallocation size and realloc value */
+        int alloc = (int) (div * DEFAULT_VALUE_LENGTH + DEFAULT_VALUE_LENGTH);
+        value = realloc(value, alloc * sizeof(char));
+    }
+
+    strncat(value, to_append, strlen(to_append));
+    update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
+    free(value); /* Free the Heap memory used by value */
+}
+
+
+
+/*
  * Array parser 
  */
 void
