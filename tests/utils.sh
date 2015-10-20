@@ -17,6 +17,10 @@
 BINDIR=bin
 
 
+# Tests dir
+TESTDIR=tests
+
+
 # Binary file
 BINARY=jsoncat
 
