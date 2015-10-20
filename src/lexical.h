@@ -30,7 +30,7 @@
 /* Public functions of the lexical analyser */
 void start_parsing (options_t* options);
 void match_symbol(char character, struct token *token,
-                  FILE *file, int *n_tabs);
+                  FILE *file, int *n_tabs, bool *inside_array);
 
 
 #endif // LEXICAL_H
