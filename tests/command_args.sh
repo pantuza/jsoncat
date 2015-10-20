@@ -6,7 +6,7 @@
 
 
 # Include tests utils
-. tests/test_utils.sh
+. tests/utils.sh
 
 
 # -------------------- T E S T S ------------------------ #
