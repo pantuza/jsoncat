@@ -272,12 +272,17 @@ parse_pair_separator (struct token *token)
  */
 void
 parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
-                       int n_tabs)
+                       int n_tabs, bool inside_array)
 {
     value[0] = VALUE_SEPARATOR;
-    value[1] = '\n';
-    value[2] = '\0';
+    value[1] = '\0';
 
+    /* If the value do not separates elements of an array, we break the line */
+    if(!inside_array){
+        value[1] = '\n';
+        value[2] = '\0';
+    }
+    /* Insert tabs on value to format json string */
     int i = 0;
     if(n_tabs > 0) {
         for(; i < n_tabs; i++) {
