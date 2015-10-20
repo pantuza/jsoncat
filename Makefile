@@ -130,5 +130,5 @@ clean:
 test: command_line_test
 
 # Rule to run the command line arguments tests
-command_line_test: $(TESTSDIR)/test_command_args.sh
+command_line_test: $(TESTSDIR)/command_args.sh
 	$(SHELL) $^
