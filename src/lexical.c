@@ -107,18 +107,7 @@ match_symbol(char character, struct token *token, FILE *file, int *n_tabs)
 
         case OBJECT_CLOSE:
         {
-            char value[] = "\n"; 
-            int i = 0;
-            *n_tabs -= 1;
-            if(*n_tabs > 0) {
-                for(; i < *n_tabs; i++) {
-                    strncat(value, "\t", sizeof(char));
-                }
-            }
-            char to_append[2] = {OBJECT_CLOSE, '\0'};
-            strncat(value, to_append, strlen(to_append));
-
-            update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
+            parse_object_close(token, n_tabs); 
             add_token(token);
 
             char next_char = getc(file);
