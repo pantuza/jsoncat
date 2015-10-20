@@ -29,13 +29,27 @@ BINARY=jsoncat
 LIMBO=/dev/null
 
 
+# String for the MAC OS X operationg system
+MAC_OS_X_OSTYPE="Darwin";
+
+# Color prefix for Linux based distributions
+COLOR_PREFIX="e";
+
+# Adding color prefix for Mac OS X
+OS=$(uname -s);
+
+[ "${OS}" == "${MAC_OS_X_OSTYPE}" ] && {
+    COLOR_PREFIX="033";
+}
+
+
 # Colors definition
-BROWN="\e[1;33m";
-BLUE="\e[1;34m";
-GRAY="\e[1;30m";
-RED="\e[1;31m";
-GREEN="\e[1;32m";
-END_COLOR="\e[0m";
+BROWN="\\${COLOR_PREFIX}[1;33m";
+BLUE="\\${COLOR_PREFIX}[1;34m";
+GRAY="\\${COLOR_PREFIX}[1;30m";
+RED="\\${COLOR_PREFIX}[1;31m";
+GREEN="\\${COLOR_PREFIX}[1;32m";
+END_COLOR="\\${COLOR_PREFIX}[0m";
 
 
 # Success message

@@ -29,7 +29,6 @@ ECHO_OPTS := -en
 #
 ifeq ($(OS), $(MAC_OS_X_OSTYPE))
 	COLOR_PREFIX := 033
-	ECHO_OPTS := -en
 endif
 
 
