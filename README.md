@@ -1,8 +1,11 @@
-jsoncat
+Jsoncat
 =======
 
 ### Description
-Json pretty-print parser based on a recursive lexical analyser 
+Json pretty-print parser based on a recursive lexical analyser. 
+The parser was based on the specification defined at [json.org](http://json.org).
+The input file is parsed to build a json object.
+If the object is correct, it will be pretty-printed to standard output.
 
 ### Usage
 Jsoncat parses a json that comes from a pipe to stdin. For example, parsing a request:
@@ -42,6 +45,21 @@ $> echo "{'test': true}" | jsoncat
         'test': true
 }
 ```
+
+### Options
+        
+**-v | --version**
+> Prints jsoncat version
+
+**-h | --help**
+> Prints help message
+
+**--no-color**
+> Does not prints json files using colors
+
+### Contributing
+
+See [here](https://github.com/pantuza/jsoncat/blob/master/CONTRIBUTING.md) how to contribute to **Jsoncat** project
 
 ### Author
 
