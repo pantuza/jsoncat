@@ -163,3 +163,19 @@ assert_command_fail ()
         assert_command "1"; # Fail
     fi;
 }
+
+
+
+#
+# Function that verifies inside string $1 if string $2 matches on grep
+#
+has_str ()
+{
+    [ -z "$2" ] && { # Verify only $2 because the string $1 can be empty
+        echo -en "${RED}Missing arguments for has_str test utility function" \
+                 "${END_COLOR}\n";
+        exit 1;
+    }
+
+    echo -en "{'test': '$1'}" | ${BINDIR}/${BINARY} | grep $2 &> ${LIMBO};
+}
