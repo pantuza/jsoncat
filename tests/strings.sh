@@ -57,5 +57,36 @@ assert_command $?;
 
 
 
+#
+# Tests a string with null
+#
+STR="null";
+test_message "Parsing a string with the null constant";
+has_str "null" $STR;
+assert_command $?;
+
+
+
+#
+# Tests a string with true
+#
+STR="true";
+test_message "Parsing a string with true as the value";
+has_str "true" $STR;
+assert_command $?;
+
+
+
+#
+# Tests a string with false as value
+#
+STR="false";
+test_message "Parsing a string with false as the value";
+has_str "false" $STR;
+assert_command $?;
+
+
+
+
 # Prints tests result
 result_message;
