@@ -50,7 +50,7 @@ assert_command $?;
 #
 # Tests a string with an array
 #
-STR="\[10, 12.2, 23\]";
+STR="[10, 12.2, 23]";
 test_message "Parsing a string with an array";
 has_str "[10, 12.2, 23]" $STR;
 assert_command $?;
@@ -86,6 +86,24 @@ has_str "false" $STR;
 assert_command $?;
 
 
+
+#
+# Tests a string with scaped text
+#
+STR="\"string\"";
+test_message "Parsing a escaped string with \"";
+has_str "\"string\"" $STR;
+assert_command $?;
+
+
+
+#
+# Tests a string with escaped text
+#
+STR="\'string\'";
+test_message "Parsing a escaped string";
+has_str "\'string\'" $STR;
+assert_command $?;
 
 
 # Prints tests result
