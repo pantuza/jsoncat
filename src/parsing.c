@@ -97,6 +97,23 @@ parse_array (struct token *token)
 
 
 
+
+/*
+ * Verifies if we are inside a string
+ */
+bool
+is_string_end(char string_open_char, char curr_char, char prev_char)
+{
+    /* If we found the string end (' or ") and it is not escaped */
+    if(curr_char == string_open_char && prev_char != '\\')
+    {
+        return true;
+    }
+    return false;
+}
+
+
+
 /*
  * String parser
  */
@@ -107,21 +124,23 @@ parse_string (struct token *token, char character,
     value[0] = character;
     value[1] = '\0';
 
-    char next_char = getc(file);
+    char prev_char = character;
+    char curr_char = getc(file);
 
-    while (next_char != character)
+    while (!is_string_end(character, curr_char, prev_char))
     {
-        strncat(value, &next_char, 1); 
+        strncat(value, &curr_char, 1); 
 
-        if(next_char == EOF) {
+        if(curr_char == EOF) {
             fprintf(stdout, RED "Malformed string\n" NO_COLOR);
             exit(EXIT_FAILURE);
         }
 
-        next_char = getc(file);
+        prev_char = curr_char;
+        curr_char = getc(file);
     }
-    strncat(value, &next_char, 1); 
-
+    
+    strncat(value, &curr_char, 1); 
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 
