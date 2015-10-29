@@ -126,7 +126,7 @@ clean:
 	@rm -rvf $(LOGDIR)/*;
 
 # Rule to run the project tests
-test: command_line_test samples_test strings_test
+test: command_line_test samples_test strings_test constants_test
 
 # Rule to run the command line arguments tests
 command_line_test: $(TESTSDIR)/command_args.sh
@@ -138,4 +138,8 @@ samples_test: $(TESTSDIR)/samples.sh
 
 # Rule to run tests on different kind of strings
 strings_test: $(TESTSDIR)/strings.sh
+	$(SHELL) $^
+
+# Rule to run tests on constants as json value
+constants_test: $(TESTSDIR)/constants.sh
 	$(SHELL) $^
