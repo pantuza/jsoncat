@@ -167,9 +167,9 @@ assert_command_fail ()
 
 
 #
-# Function that verifies inside string $1 if string $2 matches on grep
+# Function that verifies inside the json the value
 #
-has_str ()
+has_value ()
 {
     [ -z "$2" ] && { # Verify only $2 because the string $1 can be empty
         echo -en "${RED}Missing arguments for has_str test utility function" \
@@ -177,5 +177,15 @@ has_str ()
         exit 1;
     }
 
-    echo -en "{'test': '$1'}" | ${BINDIR}/${BINARY} | grep -F $2 &> ${LIMBO}
+    echo -en "{'test': $1}" | ${BINDIR}/${BINARY} | grep -F $2 &> ${LIMBO}
+}
+
+
+
+#
+# Function that verifies inside string $1 if string $2 matches on grep
+#
+has_str ()
+{
+    has_value "'$1'" $2
 }
