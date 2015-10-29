@@ -101,9 +101,40 @@ assert_command $?;
 # Tests a string with escaped text
 #
 STR="\'string\'";
-test_message "Parsing a escaped string";
+test_message "Parsing a escaped string \'";
 has_str "\'string\'" $STR;
 assert_command $?;
+
+
+
+#
+# Tests a string with lots of string open characters
+#
+STR='""""""""""';
+test_message "Parsing a string lots of string open characters";
+has_str '""""""""""' $STR;
+assert_command $?;
+
+
+
+#
+# Tests a string with special characters
+#
+STR="!@#$%ˆ&*()-=_+";
+test_message "Parsing a string special characters";
+has_str "!@#$%ˆ&*()-=_+" $STR;
+assert_command $?;
+
+
+
+#
+# Tests a string with escaped back slash
+#
+STR="\\////";
+test_message "Parsing a string with escaped back slash";
+has_str "\\////" $STR;
+assert_command $?;
+
 
 
 # Prints tests result
