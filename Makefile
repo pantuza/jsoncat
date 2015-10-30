@@ -143,3 +143,7 @@ strings_test: $(TESTSDIR)/strings.sh
 # Rule to run tests on constants as json value
 constants_test: $(TESTSDIR)/constants.sh
 	$(SHELL) $^
+
+# Rule to run tests on different types of arrays
+arrays_test: $(TESTSDIR)/arrays.sh
+	$(SHELL) $^
