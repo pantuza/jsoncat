@@ -147,3 +147,7 @@ constants_test: $(TESTSDIR)/constants.sh
 # Rule to run tests on different types of arrays
 arrays_test: $(TESTSDIR)/arrays.sh
 	$(SHELL) $^
+
+# Rule to run tests on different types of objects
+objects_test: $(TESTSDIR)/objects.sh
+	$(SHELL) $^
