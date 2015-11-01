@@ -35,7 +35,6 @@ static void set_default_options(options_t* options)
 {
     options->help = false;
     options->version = false;
-    options->use_colors = true;
 }
 
 
@@ -57,10 +56,6 @@ switch_options (int arg, options_t* options)
             options->version = true;
             version();
             exit(EXIT_SUCCESS);
-
-        case 0:
-            options->use_colors = false;
-            break;
 
         case '?':
             usage();
@@ -108,7 +103,6 @@ jsoncat_options_parser (int argc, char* argv[], options_t* options)
     {
         {"help", no_argument, 0, 'h'},
         {"version", no_argument, 0, 'v'},
-        {"no-colors", no_argument, 0, 0}
     };
     /* Abbreviated options  */
     static char abbrev[2] = "hv";
