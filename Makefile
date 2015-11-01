@@ -44,6 +44,7 @@ SRCDIR := src
 LOGDIR := log
 LIBDIR := lib
 TESTSDIR := tests
+SO_PATH := /usr/bin
 
 
 # Source code file extension
@@ -102,6 +103,21 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo $(ECHO_OPTS) "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS) 
 
+# installs the binary file at operating system path
+install: $(BINDIR)/$(BINARY)
+	@echo $(ECHO_OPTS) "Installing binary file at" \
+			  "$(BROWN)$(SO_PATH)/$(BINARY)$(END_COLOR)\n";
+	@sudo install $^ $(SO_PATH)/
+	@echo $(ECHO_OPTS) "Creating a symbolic link of the binary file to " \
+			  "$(BROWN)/bin/$(BINARY)$(END_COLOR)\n";
+	@sudo ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
+	@echo $(ECHO_OPTS) "--\n$(BROWN)Installation complete$(END_COLOR)\n"
+
+# Uninstall the jsoncat binary
+uninstall: $(SO_PATH)/$(BINARY)
+	@echo $(ECHO_OPTS) "$(BLUE)Uninstalling Jsoncat..$(END_COLOR)\n";
+	@sudo rm -vf /bin/$(BINARY)
+	@sudo rm -vf $^
 
 # Rule for run valgrind tool
 valgrind:
