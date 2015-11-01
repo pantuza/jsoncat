@@ -48,6 +48,13 @@ $> echo "{'test': true}" | jsoncat
 }
 ```
 
+### Instalation
+Clone this repository, go to project directory and run:
+```bash
+make
+make install
+```
+
 ### Options
         
 **-v | --version**
@@ -56,12 +63,33 @@ $> echo "{'test': true}" | jsoncat
 **-h | --help**
 > Prints help message
 
-**--no-color**
-> Does not prints json files using colors
-
 ### Contributing
 
-See [here](https://github.com/pantuza/jsoncat/blob/master/CONTRIBUTING.md) how to contribute to **Jsoncat** project
+We are welcome to contributions. Just do a fork, modify some code and make a 
+pull request. You may not forget to describe your modifications very well.
+It will help us on the code review. And try to write some tests.
+
+### Coding style
+
+we are not stringent with it, but we like the 
+[GNU C coding 
+style](https://www.gnu.org/prep/standards/html_node/Writing-C.html).
+
+### Testing
+
+Our test scripts are testing only the binary execution and checking for some
+error during the parsing and at the result. 
+We use bash scripts to do this task. 
+
+At the tests directory, there is a utils.sh file that defines the tests functions.
+Each other file in this directory uses the utils functions to run tests over 
+strings, numbers, objects, arrays and constants. Also, there is a script to test
+the command line options. The samples directory has a lot of json sample files
+to use during development tests.
+
+For now, we are not using any tool for testing :/. If you have suggestions 
+for it, please put it in an issue, we will certain check it out. 
+
 
 ### Author
 
