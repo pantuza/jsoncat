@@ -56,9 +56,6 @@ $> echo "{'test': true}" | jsoncat
 **-h | --help**
 > Prints help message
 
-**--no-color**
-> Does not prints json files using colors
-
 ### Contributing
 
 See [here](https://github.com/pantuza/jsoncat/blob/master/CONTRIBUTING.md) how to contribute to **Jsoncat** project
