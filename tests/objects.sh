@@ -91,5 +91,25 @@ assert_command $?;
 
 
 
+#
+# Tests an object with an inner object
+# 
+OBJ="'my_object_key'";
+test_message "Parsing an object with an inner object";
+has_value "{'my_object_key': 42}" $OBJ;
+assert_command $?;
+
+
+
+#
+# Tests an object with an inner object with two elements
+# 
+OBJ="'second_key'";
+test_message "Parsing an object with an inner object with two elements";
+has_value "{'first_key': 42, 'second_key': true}" $OBJ;
+assert_command $?;
+
+
+
 # Prints tests result
 result_message;
