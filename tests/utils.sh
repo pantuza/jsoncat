@@ -101,10 +101,8 @@ binary_exists ()
 #
 start_message ()
 {
-    echo -en "${BROWN}*** ";
-    echo -en "${BLUE}Testing ${BROWN}${BINDIR}/${BINARY} ";
-    echo -en "${BLUE}$1${END_COLOR}";
-    echo -en "${BROWN} ***${END_COLOR}\n\n";
+    echo -en "\n${BLUE}Testing ${BROWN}${BINDIR}/${BINARY} ";
+    echo -en "${BLUE}$1${END_COLOR}\n\n";
 }
 
 
@@ -114,10 +112,10 @@ start_message ()
 #
 result_message ()
 {
-    echo -en "${BROWN}--${END_COLOR}\n\n";
+    echo -en "${BROWN}--${END_COLOR}\n";
     echo -en "${BLUE}Successful tests:\t${GREEN}${N_SUCCESS}${END_COLOR}\n";
     echo -en "${BLUE}Failed tests:\t\t${RED}${N_FAILED}${END_COLOR}\n";
-    echo -en "\n${BLUE}Total tests:\t\t${END_COLOR}${N_TESTS}\n";
+    echo -en "${BLUE}Total tests:\t\t${END_COLOR}${N_TESTS}\n";
 }
 
 
