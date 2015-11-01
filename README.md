@@ -48,6 +48,13 @@ $> echo "{'test': true}" | jsoncat
 }
 ```
 
+### Instalation
+Clone this repository, go to project directory and run:
+```bash
+make
+make install
+```
+
 ### Options
         
 **-v | --version**
