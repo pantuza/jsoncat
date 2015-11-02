@@ -67,7 +67,8 @@ make install
 
 We are welcome to contributions. Just do a fork, modify some code and make a 
 pull request. You may not forget to describe your modifications very well.
-It will help us on the code review. And try to write some tests.
+It will help us on the code review. Try to write some tests, it would be
+nice.
 
 ### Coding style
 
