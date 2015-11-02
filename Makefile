@@ -45,6 +45,7 @@ LOGDIR := log
 LIBDIR := lib
 TESTSDIR := tests
 SO_PATH := /usr/bin
+BUILD_DIR := build
 
 
 # Source code file extension
@@ -118,6 +119,10 @@ uninstall: $(SO_PATH)/$(BINARY)
 	@echo $(ECHO_OPTS) "$(BLUE)Uninstalling Jsoncat..$(END_COLOR)\n";
 	@sudo rm -vf /bin/$(BINARY)
 	@sudo rm -vf $^
+
+# Build project as distribution packages
+build: $(BUILD_DIR)/Makefile
+	@make -C $^ all
 
 # Rule for run valgrind tool
 valgrind:
