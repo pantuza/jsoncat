@@ -1,0 +1,5 @@
+<package name="jsoncat" project="home:pantuza">
+  <title>Json pretty print parser</title>
+  <description>Json pretty-print parser based on a recursive lexical analyser. The parser was based on the specification defined at json.org. The input file is parsed to build a json object. If the object is correct, it will be pretty-printed to standard output.</description>
+</package>
+
