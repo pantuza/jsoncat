@@ -108,10 +108,10 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 install: $(BINDIR)/$(BINARY)
 	@echo $(ECHO_OPTS) "Installing binary file at" \
 			  "$(BROWN)$(SO_PATH)/$(BINARY)$(END_COLOR)\n";
-	@sudo install $^ $(SO_PATH)/
+	@install $^ $(SO_PATH)/
 	@echo $(ECHO_OPTS) "Creating a symbolic link of the binary file to " \
 			  "$(BROWN)/bin/$(BINARY)$(END_COLOR)\n";
-	@sudo ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
+	@ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
 	@echo $(ECHO_OPTS) "--\n$(BROWN)Installation complete$(END_COLOR)\n"
 
 # Uninstall the jsoncat binary
