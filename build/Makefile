@@ -17,8 +17,10 @@ opensuse:
 	@echo "Opensuse Build Service"
 	@$(OSC) update home:pantuza/$(PROJECT_NAME)
 	@make -C .. clean
-	@tar -czvf $(TGZ_FILE_NAME) ../* --exclude="*build*"
+	@tar -czvf $(TGZ_FILE_NAME) ../../$(PROJECT_NAME) \
+		--exclude="*build*" --exclude="*.git*"
 	@mv -v $(TGZ_FILE_NAME) home:pantuza/$(PROJECT_NAME)
+	cd home:pantuza/$(PROJECT_NAME) && $(OSC) build
 
 rpm:
 	@echo "Building rpm package"
