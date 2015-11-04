@@ -30,11 +30,14 @@ The parser was based on the specification defined at json.org.
 The input file is parsed to build a json object.
 If the object is correct, it will be pretty-printed to standard output.
 
+%prep
+%autosetup -n %{name}
+
 %build
 make %{?_smp_mflags}
 
 %install
-make install %{?_smp_mflags}
+sudo make install %{?_smp_mflags}
 
 
 %doc README.md
