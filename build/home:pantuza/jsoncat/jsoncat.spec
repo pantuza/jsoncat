@@ -37,8 +37,15 @@ If the object is correct, it will be pretty-printed to standard output.
 make %{?_smp_mflags}
 
 %install
-# norootforbuild
-sudo make install %{?_smp_mflags}
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_sbindir}
+mkdir -p %{buildroot}/bin/
 
+install bin/jsoncat %{buildroot}%{_bindir}
+install bin/jsoncat %{buildroot}%{_sbindir}
+ln -sf %{_bindir}/jsoncat /bin/jsoncat
 
-%doc README.md
+%files
+%{_bindir}/jsoncat
+%{_sbindir}/jsoncat
+/bin/jsoncat
