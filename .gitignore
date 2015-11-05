@@ -36,3 +36,6 @@ bin/jsoncat
 
 # Log files
 log/*
+
+# Opensuse Build Studio
+.osc
