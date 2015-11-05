@@ -37,6 +37,7 @@ If the object is correct, it will be pretty-printed to standard output.
 make %{?_smp_mflags}
 
 %install
+# norootforbuild
 sudo make install %{?_smp_mflags}
 
 
