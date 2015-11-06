@@ -38,14 +38,7 @@ make %{?_smp_mflags}
 
 %install
 mkdir -p %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_sbindir}
-mkdir -p %{buildroot}/bin/
-
 install bin/jsoncat %{buildroot}%{_bindir}
-install bin/jsoncat %{buildroot}%{_sbindir}
-ln -sf %{_bindir}/jsoncat /bin/jsoncat
 
 %files
 %{_bindir}/jsoncat
-%{_sbindir}/jsoncat
-/bin/jsoncat
