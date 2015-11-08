@@ -91,6 +91,7 @@ OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 # COMPILATION RULES
 #
 
+
 # Rule for link and generate the binary file
 all: $(OBJECTS)
 	@echo $(ECHO_OPTS) "$(BROWN)LD $(END_COLOR)";
@@ -104,6 +105,7 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo $(ECHO_OPTS) "$(BROWN)CC $(END_COLOR)";
 	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS) 
 
+
 # installs the binary file at operating system path
 install: $(BINDIR)/$(BINARY)
 	@echo $(ECHO_OPTS) "Installing binary file at" \
@@ -114,15 +116,18 @@ install: $(BINDIR)/$(BINARY)
 	@ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
 	@echo $(ECHO_OPTS) "--\n$(BROWN)Installation complete$(END_COLOR)\n"
 
+
 # Uninstall the jsoncat binary
 uninstall: $(SO_PATH)/$(BINARY)
 	@echo $(ECHO_OPTS) "$(BLUE)Uninstalling Jsoncat..$(END_COLOR)\n";
 	@sudo rm -vf /bin/$(BINARY)
 	@sudo rm -vf $^
 
+
 # Build project as distribution packages
 build: $(BUILD_DIR)/Makefile
 	@make -C $^ all
+
 
 # Rule for run valgrind tool
 valgrind:
@@ -139,38 +144,44 @@ valgrind:
 run: $(BINDIR)/$(BINARY)
 	@./$^ $(TESTSDIR)/samples/input_06.json
 
+
 # Rule for cleaning the project
 clean:
-
 	@rm -rvf $(BINDIR)/*;
 	@rm -rvf $(LIBDIR)/*;
 	@rm -rvf $(LOGDIR)/*;
+
 
 # Rule to run the project tests
 test: command_line_test strings_test constants_test arrays_test \
 	  objects_test samples_test
 
+
 # Rule to run the command line arguments tests
 command_line_test: $(TESTSDIR)/command_args.sh
 	@$(SHELL) $^
+
 
 # Rule to run tests on different kind of strings
 strings_test: $(TESTSDIR)/strings.sh
 	@$(SHELL) $^
 
+
 # Rule to run tests on constants as json value
 constants_test: $(TESTSDIR)/constants.sh
 	@$(SHELL) $^
+
 
 # Rule to run tests on different types of arrays
 arrays_test: $(TESTSDIR)/arrays.sh
 	@$(SHELL) $^
 
+
 # Rule to run tests on different types of objects
 objects_test: $(TESTSDIR)/objects.sh
 	@$(SHELL) $^
 
+
 # Rule to run samples parsing test
 samples_test: $(TESTSDIR)/samples.sh
 	@$(SHELL) $^
-
