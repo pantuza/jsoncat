@@ -103,7 +103,7 @@ valgrind:
 		--leak-check=full \
 		--leak-resolution=high \
 		--log-file=$(LOGDIR)/$@.log \
-		$(BINDIR)/$(BINARY)
+		$(BINDIR)/$(BINARY) $(TESTSDIR)/samples/input_08.json
 	@echo $(ECHO_OPTS) "\nCheck the log file: $(LOGDIR)/$@.log\n"
 
 
