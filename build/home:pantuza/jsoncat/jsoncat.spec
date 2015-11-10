@@ -34,7 +34,7 @@ If the object is correct, it will be pretty-printed to standard output.
 %autosetup -n %{name}
 
 %build
-make %{?_smp_mflags}
+make CFLAGS="%{optflags}" %{?_smp_mflags}
 
 %install
 mkdir -p %{buildroot}%{_bindir}
@@ -42,3 +42,5 @@ install bin/jsoncat %{buildroot}%{_bindir}
 
 %files
 %{_bindir}/jsoncat
+
+%changelog
