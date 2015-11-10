@@ -4,38 +4,8 @@
 #
 #
 
-# Shell program
-SHELL := bash
-
-
-# Gets from shell the operating system
-OS := $(shell uname -s)
-
-# String for the MAC OS X operationg system
-MAC_OS_X_OSTYPE := Darwin
-
-#
-# Color prefix for Linux based distributions
-#
-COLOR_PREFIX := e
-
-# echo command line options for Linux based distributions
-ECHO_OPTS := -en
-
-
-#
-# If the operating system is MAC OS X, the colors prefix and echo options 
-# must be different
-#
-ifeq ($(OS), $(MAC_OS_X_OSTYPE))
-	COLOR_PREFIX := 033
-endif
-
-
-# Color definition for print purpose
-BROWN=\$(COLOR_PREFIX)[0;33m
-BLUE=\$(COLOR_PREFIX)[1;34m
-END_COLOR=\$(COLOR_PREFIX)[0m
+# Include generic Makefile variables
+include Makefile.conf
 
 
 # Source code directory structure
@@ -71,9 +41,6 @@ CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 # Debug options 
 DEBUG := -g3 # -DDEBUG=1
 
-# Dependency libraries
-LIBS := -lm
-
 
 #
 # The binary file name
@@ -95,7 +62,7 @@ OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 # Rule for link and generate the binary file
 all: $(OBJECTS)
 	@echo $(ECHO_OPTS) "$(BROWN)LD $(END_COLOR)";
-	$(CC) -o $(BINDIR)/$(BINARY) $+ $(DEBUG) $(CFLAGS) $(LIBS) 
+	$(CC) -o $(BINDIR)/$(BINARY) $+ $(DEBUG) $(CFLAGS)
 	@echo $(ECHO_OPTS) "\n--\nBinary file placed at" \
 			  "$(BROWN)$(BINDIR)/$(BINARY)$(END_COLOR)\n";
 
@@ -103,7 +70,7 @@ all: $(OBJECTS)
 # Rule for object binaries compilation
 $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo $(ECHO_OPTS) "$(BROWN)CC $(END_COLOR)";
-	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS) $(LIBS) 
+	$(CC) -c $^ -o $@ $(DEBUG) $(CFLAGS)
 
 
 # installs the binary file at operating system path
