@@ -18,7 +18,7 @@
 Name:           jsoncat
 Version:        0.1.0
 Release:        1%{?dist}
-License:        GPLv2+
+License:        GPL-2.0+
 Summary:        Json pretty-print parser based on a recursive lexical analyser
 Url:            https://github.com/pantuza/%{name}
 Source:         %{name}-%{version}.tar.gz
