@@ -48,12 +48,23 @@ $> echo "{'test': true}" | jsoncat
 }
 ```
 
-### Instalation
+### Installation
+
+###### From Homebrew for Mac OS
+In a terminal install jsoncat from tap source:
+```bash
+$> brew tap pantuza/homebrew-jsoncat
+$> brew install jsoncat
+```
+
+###### From source
 Clone this repository, go to project directory and run:
 ```bash
-make
-make install
+$> make
+$> make install
 ```
+> **PS:** I'm creating the RPM and DEB packages. A soon as possible you would install jsoncat
+> from these sources.
 
 ### Options
         
