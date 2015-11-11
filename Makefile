@@ -74,14 +74,17 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 
 # installs the binary file at operating system path
-install: $(BINDIR)/$(BINARY)
+install: $(BINDIR)/$(BINARY) $(DOCS)/$(MANPAGE)
 	@echo $(ECHO_OPTS) "Installing binary file at" \
 			  "$(BROWN)$(SO_PATH)/$(BINARY)$(END_COLOR)\n";
 	@install $^ $(SO_PATH)/
-	@echo $(ECHO_OPTS) "Creating a symbolic link of the binary file to " \
+	@echo $(ECHO_OPTS) "Creating a symbolic link of the binary file on" \
 			  "$(BROWN)/bin/$(BINARY)$(END_COLOR)\n";
 	@ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
-	@echo $(ECHO_OPTS) "--\n$(BROWN)Installation complete$(END_COLOR)\n"
+	@echo $(ECHO_OPTS) "Installing manpages at" \
+		  "$(BROWN)$(MANPAGE_OS_DIR)/$(MANPAGE)$(END_COLOR)\n";
+	@install $(DOCS)/$(MANPAGE) $(MANPAGE_OS_DIR)/$(MANPAGE)
+	@echo $(ECHO_OPTS) "--\n\n$(BROWN)Installation complete$(END_COLOR)\n"
 
 
 # Uninstall the jsoncat binary
