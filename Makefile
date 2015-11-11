@@ -15,6 +15,7 @@ LOGDIR := log
 LIBDIR := lib
 TESTSDIR := tests
 SO_PATH := /usr/bin
+BIN_SO_PATH := /bin
 BUILD_DIR := build
 
 
@@ -79,8 +80,8 @@ install: $(BINDIR)/$(BINARY) $(DOCS)/$(MANPAGE)
 			  "$(BROWN)$(SO_PATH)/$(BINARY)$(END_COLOR)\n";
 	@install $^ $(SO_PATH)/
 	@echo $(ECHO_OPTS) "Creating a symbolic link of the binary file on" \
-			  "$(BROWN)/bin/$(BINARY)$(END_COLOR)\n";
-	@ln -sf $(SO_PATH)/$(BINARY) /bin/$(BINARY)
+			  "$(BROWN)$(BIN_SO_PATH)/$(BINARY)$(END_COLOR)\n";
+	@ln -sf $(SO_PATH)/$(BINARY) $(BIN_SO_PATH)/$(BINARY)
 	@echo $(ECHO_OPTS) "Installing manpages at" \
 		  "$(BROWN)$(MANPAGE_OS_DIR)/$(MANPAGE)$(END_COLOR)\n";
 	@install $(DOCS)/$(MANPAGE) $(MANPAGE_OS_DIR)/$(MANPAGE)
@@ -90,8 +91,9 @@ install: $(BINDIR)/$(BINARY) $(DOCS)/$(MANPAGE)
 # Uninstall the jsoncat binary
 uninstall: $(SO_PATH)/$(BINARY)
 	@echo $(ECHO_OPTS) "$(BLUE)Uninstalling Jsoncat..$(END_COLOR)\n";
-	@sudo rm -vf /bin/$(BINARY)
-	@sudo rm -vf $^
+	@rm -vf $(BIN_SO_PATH)/$(BINARY)
+	@rm -vf $^
+	@rm -vf $(MANPAGE_OS_DIR)/$(MANPAGE)
 
 
 # Build project as distribution packages
