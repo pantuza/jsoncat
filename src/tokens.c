@@ -119,18 +119,22 @@ print_json_error (char json[])
  * Prints token value into the result json
  */
 void
-add_token (struct token *token)
+add_token (struct token *token, options_t *options)
 {
-    /* Always there is 2 colors in the string: token->color and NO_COLOR */ 
+    /* There is 2 colors in the string: token->color and NO_COLOR */ 
     int colors_size = 2 * COLOR_STR_SIZE;
 
     int size = strlen(token->value) + colors_size;
     char value[size];
 
+    if(options->use_colors) {
 
-    /* Formats the new value */
-    snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
-    fprintf(stdout, "%s", value);
+        snprintf(value, size, "%s%s%s", token->color, token->value, NO_COLOR);
+        fprintf(stdout, "%s", value);
+    } else {
+
+        fprintf(stdout, "%s", token->value);
+    }
 
     if(token->type == TOKEN_ERROR) {
         print_json_error(value);

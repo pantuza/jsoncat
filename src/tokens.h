@@ -20,6 +20,9 @@
 #define TOKENS_H
 
 
+#include "args.h"
+
+
 /*
  * Tokens are based on the JSON object model definition: http://json.org
  */
@@ -83,7 +86,7 @@ void set_value (struct token *token, char value[DEFAULT_VALUE_LENGTH]);
 
 void update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
               char value[DEFAULT_VALUE_LENGTH], int inc_line, int inc_column);
-void add_token (struct token *token);
+void add_token (struct token *token, options_t *options);
 
 
 #endif // TOKENS_H
