@@ -57,6 +57,12 @@
 #define DEFAULT_VALUE_LENGTH 512
 
 
+/* Switch tabs with spaces */
+#define EXPANDTAB   ""
+
+/* Default tabstop */
+#define TABSTOP     4
+
 /*
  * Types used by the lexical analiser
  */
