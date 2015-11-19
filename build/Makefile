@@ -42,6 +42,7 @@ all: opensuse rpm deb
 
 # Creates a tar.gz file with all source files
 tarfile:
+	@make -C .. clean;
 	@tar -czvf $(TGZ_FILE_NAME) ../../$(PROJECT_NAME) \
 		--exclude="*build*" --exclude="*.git*"
 	@mv -v $(TGZ_FILE_NAME) $(OBS_DIR)/$(PROJECT_NAME)
