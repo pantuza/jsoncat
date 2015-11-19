@@ -37,11 +37,10 @@ parse_object(struct token *token, char value[DEFAULT_VALUE_LENGTH], int n_tabs)
     value[1] = '\n';
     value[2] = '\0';
 
-    int i = 0;
     if(n_tabs > 0) {
-        for(; i < n_tabs; i++) {
-            strncat(value, "\t", sizeof(char));
-        }
+        char tab_str[10];
+        snprintf(tab_str, 10, "%*s", n_tabs * TABSTOP, EXPANDTAB);
+        strncat(value, tab_str, 10);
     }
 
     update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
@@ -60,12 +59,12 @@ parse_object_close(struct token *token, int *n_tabs)
     strncpy(value, "\n\0", 2);
 
     *n_tabs -= 1;
-    int i;
     /* Fill value with tab characters for identation */
-    if(*n_tabs > 0)
-        for(i = 0; i < *n_tabs; i++)
-            strncat(value, "\t", sizeof(char));
-
+    if(*n_tabs > 0) {
+        char tab_str[10];
+        snprintf(tab_str, 10, "%*s", *n_tabs * TABSTOP, EXPANDTAB);
+        strncat(value, tab_str, 10);
+    }
     
     char to_append[2] = {OBJECT_CLOSE, '\0'};
 
@@ -302,11 +301,10 @@ parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
         value[2] = '\0';
     }
     /* Insert tabs on value to format json string */
-    int i = 0;
     if(n_tabs > 0) {
-        for(; i < n_tabs; i++) {
-            strncat(value, "\t", sizeof(char));
-        }
+        char tab_str[10];
+        snprintf(tab_str, 10, "%*s", n_tabs * TABSTOP, EXPANDTAB);
+        strncat(value, tab_str, 10);
     }
 
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
