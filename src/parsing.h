@@ -30,7 +30,10 @@
 void parse_object (struct token *token,
                    char value[DEFAULT_VALUE_LENGTH], int *n_tabs);
 void parse_object_close(struct token *token, int *n_tabs);
-void parse_array (struct token *token);
+void parse_array_open (struct token *token,
+                       int *n_tabs, char value[DEFAULT_VALUE_LENGTH]);
+void parse_array_close (struct token *token,
+                        int *n_tabs, char value[DEFAULT_VALUE_LENGTH]);
 void parse_string (struct token *token, char character,
                    char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_pair_separator (struct token *token);
