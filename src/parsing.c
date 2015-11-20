@@ -31,16 +31,19 @@
  * Object parser
  */
 void
-parse_object(struct token *token, char value[DEFAULT_VALUE_LENGTH], int n_tabs)
+parse_object(struct token *token,
+             char value[DEFAULT_VALUE_LENGTH], int *n_tabs)
 { 
+    *n_tabs += 1;
+
     value[0] = OBJECT_OPEN;
     value[1] = '\n';
     value[2] = '\0';
 
-    if(n_tabs > 0) {
-        char tab_str[10];
-        snprintf(tab_str, 10, "%*s", n_tabs * TABSTOP, EXPANDTAB);
-        strncat(value, tab_str, 10);
+    if(*n_tabs > 0) {
+        char tab_str[EXPANDTAB_SIZE];
+        expandtab(tab_str, *n_tabs);
+        strncat(value, tab_str, EXPANDTAB_SIZE);
     }
 
     update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
@@ -61,9 +64,9 @@ parse_object_close(struct token *token, int *n_tabs)
     *n_tabs -= 1;
     /* Fill value with tab characters for identation */
     if(*n_tabs > 0) {
-        char tab_str[10];
-        snprintf(tab_str, 10, "%*s", *n_tabs * TABSTOP, EXPANDTAB);
-        strncat(value, tab_str, 10);
+        char tab_str[EXPANDTAB_SIZE];
+        expandtab(tab_str, *n_tabs);
+        strncat(value, tab_str, EXPANDTAB_SIZE);
     }
     
     char to_append[2] = {OBJECT_CLOSE, '\0'};
@@ -302,9 +305,9 @@ parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
     }
     /* Insert tabs on value to format json string */
     if(n_tabs > 0) {
-        char tab_str[10];
-        snprintf(tab_str, 10, "%*s", n_tabs * TABSTOP, EXPANDTAB);
-        strncat(value, tab_str, 10);
+        char tab_str[EXPANDTAB_SIZE];
+        expandtab(tab_str, n_tabs);
+        strncat(value, tab_str, EXPANDTAB_SIZE);
     }
 
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
