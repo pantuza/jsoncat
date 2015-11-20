@@ -88,16 +88,51 @@ parse_object_close(struct token *token, int *n_tabs)
 
 
 /*
- * Array parser 
+ * Array parser open
  */
 void
-parse_array (struct token *token)
+parse_array_open (struct token *token,
+             int *n_tabs, char value[DEFAULT_VALUE_LENGTH])
 {
-    char value[3] = {ARRAY_OPEN, ' ', '\0'};
+    memset(value, 0, DEFAULT_VALUE_LENGTH);
+
+    if(token->type == ARRAY_OPEN){
+        *n_tabs += 1;
+        value[0] = '\n';
+        char tab_str[EXPANDTAB_SIZE];
+        expandtab(tab_str, *n_tabs);
+        strncat(value, tab_str, EXPANDTAB_SIZE);
+    }
+    int size = strlen(value);
+    value[size] = ARRAY_OPEN;
+    value[++size] = ' ';
+    value[++size] = '\0';
+
     update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
 }
 
 
+/*
+ * Parse array close
+ */
+void parse_array_close (struct token *token,
+                        int *n_tabs, char value[DEFAULT_VALUE_LENGTH])
+{
+    memset(value, 0, DEFAULT_VALUE_LENGTH);
+
+    if(token->type == ARRAY_CLOSE) {
+        *n_tabs -= 1;
+        value[0] = '\n';
+        char tab_str[EXPANDTAB_SIZE];
+        expandtab(tab_str, *n_tabs);
+        strncat(value, tab_str, EXPANDTAB_SIZE);
+    }
+    int size = strlen(value);
+    value[size] = ARRAY_CLOSE;
+    value[++size] = '\0';
+
+    update_token(token, ARRAY_CLOSE, GRAY, value, 1, 0);
+}
 
 
 /*
