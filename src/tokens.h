@@ -61,7 +61,7 @@
 #define EXPANDTAB   ""
 
 /* expanded tabs string size */
-#define EXPANDTAB_SIZE  10
+#define EXPANDTAB_SIZE  256
 
 /* Default tabstop */
 #define TABSTOP     4
