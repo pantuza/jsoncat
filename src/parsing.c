@@ -302,12 +302,17 @@ parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
     if(!inside_array){
         value[1] = '\n';
         value[2] = '\0';
-    }
-    /* Insert tabs on value to format json string */
-    if(n_tabs > 0) {
-        char tab_str[EXPANDTAB_SIZE];
-        expandtab(tab_str, n_tabs);
-        strncat(value, tab_str, EXPANDTAB_SIZE);
+
+        /* Insert tabs on value to format json */
+        if(n_tabs > 0) {
+            char tab_str[EXPANDTAB_SIZE];
+            expandtab(tab_str, n_tabs);
+            strncat(value, tab_str, EXPANDTAB_SIZE);
+        }
+    } else {
+        /* If inside an array, separate elements with a single space */ 
+        value[1] = ' ';
+        value[2] = '\0';
     }
 
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
