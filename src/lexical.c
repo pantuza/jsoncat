@@ -118,8 +118,9 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case ARRAY_OPEN:
         {
+            char value[DEFAULT_VALUE_LENGTH];
             *in_array = true;
-            parse_array(token);
+            parse_array_open(token, n_tabs, value);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -141,8 +142,8 @@ match_symbol(char character, struct token *token, FILE *file,
         case ARRAY_CLOSE:
         {
             *in_array = false;
-            char value[2] = {ARRAY_CLOSE, '\0'};
-            update_token(token, ARRAY_CLOSE, GRAY, value, 1, 0);
+            char value[DEFAULT_VALUE_LENGTH];
+            parse_array_close(token, n_tabs, value);
             add_token(token, options);
 
             char next_char = getc(file);
