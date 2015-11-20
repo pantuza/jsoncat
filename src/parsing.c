@@ -105,7 +105,6 @@ parse_array_open (struct token *token,
     }
     int size = strlen(value);
     value[size] = ARRAY_OPEN;
-    value[++size] = ' ';
     value[++size] = '\0';
 
     update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
