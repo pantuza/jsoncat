@@ -28,7 +28,7 @@
 
 
 void parse_object (struct token *token,
-                   char value[DEFAULT_VALUE_LENGTH], int n_tabs);
+                   char value[DEFAULT_VALUE_LENGTH], int *n_tabs);
 void parse_object_close(struct token *token, int *n_tabs);
 void parse_array (struct token *token);
 void parse_string (struct token *token, char character,
