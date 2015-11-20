@@ -140,3 +140,15 @@ add_token (struct token *token, options_t *options)
         print_json_error(value);
     }
 }
+
+
+/*
+ * Expand tabs with spaces
+ */
+char*
+expandtab (int n_tabs)
+{
+    char *tab_str = malloc(EXPANDTAB_SIZE);
+    snprintf(tab_str, EXPANDTAB_SIZE, "%*s", n_tabs * TABSTOP, EXPANDTAB);
+    return tab_str;
+}

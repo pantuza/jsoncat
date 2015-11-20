@@ -60,6 +60,9 @@
 /* Switch tabs with spaces */
 #define EXPANDTAB   ""
 
+/* expanded tabs string size */
+#define EXPANDTAB_SIZE  10
+
 /* Default tabstop */
 #define TABSTOP     4
 
@@ -93,6 +96,7 @@ void set_value (struct token *token, char value[DEFAULT_VALUE_LENGTH]);
 void update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
               char value[DEFAULT_VALUE_LENGTH], int inc_line, int inc_column);
 void add_token (struct token *token, options_t *options);
+void expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs);
 
 
 #endif // TOKENS_H
