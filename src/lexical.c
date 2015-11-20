@@ -88,8 +88,7 @@ match_symbol(char character, struct token *token, FILE *file,
         {
             *in_array = false;
             char value[DEFAULT_VALUE_LENGTH];
-            *n_tabs += 1;
-            parse_object(token, value, *n_tabs);
+            parse_object(token, value, n_tabs);
             add_token(token, options);
 
             char next_char = getc(file);
