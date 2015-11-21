@@ -39,6 +39,7 @@ main (int argc, char* argv[])
     fprintf(stdout, BROWN "help: %d\n" NO_COLOR, options.help);
     fprintf(stdout, BROWN "version: %d\n" NO_COLOR, options.version);
     fprintf(stdout, BROWN "use colors: %d\n" NO_COLOR, options.use_colors);
+    fprintf(stdout, BROWN "tab stop: %d\n" NO_COLOR, options.tab_stop);
     fprintf(stdout, BROWN "filename: %s\n" NO_COLOR, options.file_name);
 #endif
 
