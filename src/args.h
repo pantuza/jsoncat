@@ -33,6 +33,7 @@ struct options
     bool help;
     bool version;
     bool use_colors;
+    unsigned int tab_stop;
     char file_name[FILE_NAME_SIZE];
 };
 
