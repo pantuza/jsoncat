@@ -28,18 +28,18 @@
 
 
 void parse_object (struct token *token,
-                   char value[DEFAULT_VALUE_LENGTH], int *n_tabs);
-void parse_object_close(struct token *token, int *n_tabs);
-void parse_array_open (struct token *token,
-                       int *n_tabs, char value[DEFAULT_VALUE_LENGTH]);
-void parse_array_close (struct token *token,
-                        int *n_tabs, char value[DEFAULT_VALUE_LENGTH]);
+                   char value[DEFAULT_VALUE_LENGTH], int *n_tabs, int tabstop);
+void parse_object_close(struct token *token, int *n_tabs, int tabstop);
+void parse_array_open (struct token *token, int *n_tabs,
+                       char value[DEFAULT_VALUE_LENGTH], int tabstop);
+void parse_array_close (struct token *token, int *n_tabs,
+                        char value[DEFAULT_VALUE_LENGTH], int tabstop);
 void parse_string (struct token *token, char character,
                    char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_pair_separator (struct token *token);
 void parse_value_separator (struct token *token,
                             char value[DEFAULT_VALUE_LENGTH],
-                            int n_tabs, bool inside_array);
+                            int n_tabs, bool inside_array, int tabstop);
 void parse_number (struct token *token, char character,
                    char value[DEFAULT_VALUE_LENGTH], FILE *file);
 void parse_true_token (struct token *token, FILE *file);
