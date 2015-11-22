@@ -32,7 +32,7 @@
  */
 void
 parse_object(struct token *token,
-             char value[DEFAULT_VALUE_LENGTH], int *n_tabs)
+             char value[DEFAULT_VALUE_LENGTH], int *n_tabs, int tabstop)
 { 
     *n_tabs += 1;
 
@@ -42,7 +42,7 @@ parse_object(struct token *token,
 
     if(*n_tabs > 0) {
         char tab_str[EXPANDTAB_SIZE];
-        expandtab(tab_str, *n_tabs);
+        expandtab(tab_str, *n_tabs, tabstop);
         strncat(value, tab_str, EXPANDTAB_SIZE);
     }
 
@@ -55,7 +55,7 @@ parse_object(struct token *token,
  * Parse the object close token
  */
 void
-parse_object_close(struct token *token, int *n_tabs) 
+parse_object_close(struct token *token, int *n_tabs, int tabstop) 
 {
     /* Allocates the default value size */
     char *value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
@@ -65,7 +65,7 @@ parse_object_close(struct token *token, int *n_tabs)
     /* Fill value with tab characters for identation */
     if(*n_tabs > 0) {
         char tab_str[EXPANDTAB_SIZE];
-        expandtab(tab_str, *n_tabs);
+        expandtab(tab_str, *n_tabs, tabstop);
         strncat(value, tab_str, EXPANDTAB_SIZE);
     }
     
@@ -92,7 +92,7 @@ parse_object_close(struct token *token, int *n_tabs)
  */
 void
 parse_array_open (struct token *token,
-             int *n_tabs, char value[DEFAULT_VALUE_LENGTH])
+             int *n_tabs, char value[DEFAULT_VALUE_LENGTH], int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -100,7 +100,7 @@ parse_array_open (struct token *token,
         *n_tabs += 1;
         value[0] = '\n';
         char tab_str[EXPANDTAB_SIZE];
-        expandtab(tab_str, *n_tabs);
+        expandtab(tab_str, *n_tabs, tabstop);
         strncat(value, tab_str, EXPANDTAB_SIZE);
     }
     int size = strlen(value);
@@ -114,8 +114,8 @@ parse_array_open (struct token *token,
 /*
  * Parse array close
  */
-void parse_array_close (struct token *token,
-                        int *n_tabs, char value[DEFAULT_VALUE_LENGTH])
+void parse_array_close (struct token *token, int *n_tabs,
+                        char value[DEFAULT_VALUE_LENGTH], int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -123,7 +123,7 @@ void parse_array_close (struct token *token,
         *n_tabs -= 1;
         value[0] = '\n';
         char tab_str[EXPANDTAB_SIZE];
-        expandtab(tab_str, *n_tabs);
+        expandtab(tab_str, *n_tabs, tabstop);
         strncat(value, tab_str, EXPANDTAB_SIZE);
     }
     int size = strlen(value);
@@ -327,7 +327,7 @@ parse_pair_separator (struct token *token)
  */
 void
 parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
-                       int n_tabs, bool inside_array)
+                       int n_tabs, bool inside_array, int tabstop)
 {
     value[0] = VALUE_SEPARATOR;
     value[1] = '\0';
@@ -340,7 +340,7 @@ parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
         /* Insert tabs on value to format json */
         if(n_tabs > 0) {
             char tab_str[EXPANDTAB_SIZE];
-            expandtab(tab_str, n_tabs);
+            expandtab(tab_str, n_tabs, tabstop);
             strncat(value, tab_str, EXPANDTAB_SIZE);
         }
     } else {
