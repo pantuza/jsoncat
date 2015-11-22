@@ -146,8 +146,8 @@ add_token (struct token *token, options_t *options)
  * Expand tabs with spaces
  */
 void
-expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs)
+expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs, int tabstop)
 {
-    int tabs_no = n_tabs * TABSTOP;
+    int tabs_no = n_tabs * tabstop;
     snprintf(tab_str, EXPANDTAB_SIZE, "%*s", tabs_no, EXPANDTAB);
 }
