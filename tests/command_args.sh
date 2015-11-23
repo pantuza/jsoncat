@@ -82,5 +82,25 @@ test_message "Parse a valid json input file";
 assert_command $?;
 
 
+
+#
+# Verifies --no-color option
+#
+test_message "Should not print colors characteres";
+./${BINDIR}/${BINARY} --no-color "tests/samples/input_06.json" \
+    | grep "37m" &> ${LIMBO};
+assert_command_fail $?;
+
+
+
+#
+# Verifies --no-color option
+#
+test_message "Should print colors characteres";
+./${BINDIR}/${BINARY} "tests/samples/input_06.json" | grep "37m" &> ${LIMBO};
+assert_command $?;
+
+
+
 # Prints tests result
 result_message;
