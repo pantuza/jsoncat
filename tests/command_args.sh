@@ -102,5 +102,15 @@ assert_command $?;
 
 
 
+#
+# Verifies --tab-stop option
+#
+test_message "Should print an error when no tabstop is informed";
+./${BINDIR}/${BINARY} "tests/samples/input_06.json" --tab-stop 2>&1 >${LIMBO} \
+    | grep "requires" &> ${LIMBO};
+assert_command $?;
+
+
+
 # Prints tests result
 result_message;
