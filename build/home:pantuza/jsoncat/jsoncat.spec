@@ -40,7 +40,14 @@ make CFLAGS="%{optflags}" %{?_smp_mflags}
 mkdir -p %{buildroot}%{_bindir}
 install bin/jsoncat %{buildroot}%{_bindir}
 
+mkdir -p %{buildroot}%{_mandir}/man1
+install -m 644 docs/jsoncat.1 %{buildroot}%{_mandir}/man1/jsoncat.1
+
+
 %files
-%{_bindir}/jsoncat
+%{_bindir}/jsoncat 
+%{_mandir}/man1/jsoncat.1.gz
+
+%doc README.md
 
 %changelog
