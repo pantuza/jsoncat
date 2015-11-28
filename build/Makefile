@@ -32,6 +32,11 @@ AUTHOR_EMAIL := gustavopantuza@gmail.com
 # Author site
 AUTHOR_SITE := "https://pantuza.com"
 
+# Scripts directory
+SCRIPTS := scripts
+
+# Script for build
+BUILDER := ${SCRIPTS}/builder.sh
 
 
 #
@@ -49,6 +54,8 @@ tarfile:
 	@echo $(ECHO_OPTS) "\n--\nCreated project tarball at " \
 		"$(BROWN)$(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME)$(END_COLOR)\n";
 	
+new_version:
+	@. ${BUILDER} $@;
 
 # Builds the project package for OpenSUSE
 opensuse: $(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME)
