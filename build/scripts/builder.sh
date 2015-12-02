@@ -26,11 +26,23 @@ get_new_version ()
 #
 # Updates the version at the source file
 #
-update_version ()
+update_version_on_src_file ()
 {
     RE="s/__JSONCAT_VERSION__ \".*\"/__JSONCAT_VERSION__ \"${NEW_VERSION}\"/g";
-    ${SED} ${SEDOPTS} "${RE}" ${VERSION_FILE};
+    ${SED} ${SEDOPTS} "${RE}" ${SRC_VERSION_FILE};
 }
+
+
+
+#
+# Updates the version at the spec file
+#
+update_version_on_spec_file ()
+{
+    RE="s/Version:.*/Version:\t\t${NEW_VERSION}/g";
+    ${SED} ${SEDOPTS} "${RE}" ${SPEC_FILE};
+}
+
 
 
 #
@@ -38,7 +50,8 @@ update_version ()
 #
 create_tag_from_new_version ()
 {
-    ${GIT} add ${VERSION_FILE};
+    ${GIT} add ${SRC_VERSION_FILE};
+    ${GIT} add ${SPEC_FILE};
     ${GIT} commit -m "New version ${NEW_VERSION}";
     ${GIT} tag ${NEW_VERSION};
     ${GIT} push origin ${NEW_VERSION};
@@ -54,7 +67,8 @@ new_version ()
     ${ECHO} ${ECHO_OPTS} "Current version is: ${VERSION}";
     ${ECHO} ${ECHO_OPTS} "Enter the new version";
     get_new_version;
-    update_version;
+    update_version_on_src_file;
+    update_version_on_spec_file;
     create_tag_from_new_version;
 }
 
@@ -73,7 +87,6 @@ main ()
             exit 1;
     esac;
 }
-
 
 
 #
