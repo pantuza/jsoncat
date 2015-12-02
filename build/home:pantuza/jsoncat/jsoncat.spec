@@ -16,7 +16,7 @@
 #
 
 Name:           jsoncat
-Version:        0.1.0
+Version:	0.1.1
 Release:        1%{?dist}
 License:        GPL-2.0+
 Summary:        Json pretty-print parser based on a recursive lexical analyser
