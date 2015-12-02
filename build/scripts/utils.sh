@@ -16,5 +16,10 @@ SEDOPTS="-i";
 GIT=$(which git);
 
 
+# Directories
+SPEC_DIR="home:pantuza/jsoncat";
+
+
 # Files
-VERSION_FILE="../src/messages.h";
+SRC_VERSION_FILE="../src/messages.h";
+SPEC_FILE="${SPEC_DIR}/jsoncat.spec"
