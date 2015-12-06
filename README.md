@@ -74,6 +74,10 @@ $> make install
 **-h | --help**
 > Prints help message
 
+**--no-color**
+> Removes the color characters. This characters are useful only for the terminal that will pretty print the Json.
+> If you want to store the resulted Json to a file, use this option to persist a valid Json.
+
 ### Contributing
 
 We are welcome to contributions. Just do a fork, modify some code and make a 
