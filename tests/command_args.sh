@@ -112,5 +112,25 @@ assert_command $?;
 
 
 
+#
+# Verifies --tab-stop option with default tab space
+#
+test_message "Should not have 8 spaces when using default tab space";
+./${BINDIR}/${BINARY} "tests/samples/input_06.json" \
+    | grep "        " &> ${LIMBO};
+assert_command_fail $?;
+
+
+
+#
+# Verifies --tab-stop been equal 8 spaces
+#
+test_message "Should print json tabulation using 8 spaces";
+./${BINDIR}/${BINARY} "tests/samples/input_06.json" --tab-stop 8 \
+    | grep "        " &> ${LIMBO};
+assert_command $?;
+
+
+
 # Prints tests result
 result_message;
