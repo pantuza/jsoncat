@@ -74,6 +74,15 @@ $> make install
 **-h | --help**
 > Prints help message
 
+**--no-color**
+> Removes the color characters. This characters are useful only for the terminal that will pretty print the Json.
+> If you want to store the resulted Json to a file, use this option to persist a valid Json.
+
+**--tab-stop**
+> Sets the tab stop used by Jsoncat. We never insert tab character. Instead, we expand tab with spaces. 
+> For that, the --tab-stop configures the number of spaces used for Json indentation. The default value
+> is 4.
+
 ### Contributing
 
 We are welcome to contributions. Just do a fork, modify some code and make a 
