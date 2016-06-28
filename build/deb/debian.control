@@ -3,6 +3,7 @@ Section: interpreters
 Priority: optional
 Maintainer: Gustavo Pantuza <gustavopantuza@gmail.com>
 Build-Depends: debhelper (>= 4.1.16)
+Homepage: https://github.com/pantuza/jsoncat
 
 Package: jsoncat
 Architecture: any
