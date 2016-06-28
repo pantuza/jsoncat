@@ -39,3 +39,7 @@ log/*
 
 # Opensuse Build Studio
 .osc
+
+# Debian build files
+build-stamp
+build/deb/jsoncat.debhelper.log
