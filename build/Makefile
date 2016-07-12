@@ -39,6 +39,10 @@ SCRIPTS := scripts
 BUILDER := ${SCRIPTS}/builder.sh
 
 
+# Dpkg Buildpackage
+DPKGBUILD := $(shell which dpkg-buildpackage)
+
+
 #
 # Target rules to build and package the project
 #
@@ -73,7 +77,10 @@ rpm:
 # Build the project package for Debian distributions
 deb:
 	@echo $(ECHO_OPTS) "$(BROWN)Building Debian package$(END_COLOR)\n";
+	$(DPKGBUILD) -us -uc -d
 
+project:
+	@make -C ..
 
 # Creates the project manpage
 manpage:
