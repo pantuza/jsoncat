@@ -18,7 +18,7 @@ endif
 build: build-stamp
 build-stamp:
 	dh_testdir
-	make all
+	make project
 	touch build-stamp
 
 clean:
@@ -37,7 +37,7 @@ install: build
 	#make install DESTDIR=/usr/src/packages/BUILD/debian/ace
 
 # Build architecture-independent files here.
-binary-indep: build 
+binary-indep: build
     # We have nothing to do by default.
 
 # Build architecture-dependent files here.
