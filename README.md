@@ -12,7 +12,7 @@ If the object is correct, it will be pretty-printed to standard output.
 ### Usage
 Jsoncat parses a json that comes from a pipe to stdin. For example, parsing a request:
 ```bash
-$> curl -s https://pantuza.com/sample.json --insecure | bin/jsoncat
+$> curl -s https://pantuza.com/sample.json --insecure | jsoncat
 ```
 ```javascript
 {
