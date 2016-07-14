@@ -10,7 +10,7 @@
 #
 get_current_version ()
 {
-    VERSION=$(${CAT} ../src/messages.h |${GREP} "VERSION" |${CUT} -d ' ' -f3);    
+    VERSION=$(${CAT} ../src/messages.h |${GREP} "VERSION" |${CUT} -d ' ' -f3);
 }
 
 
@@ -60,7 +60,7 @@ create_tag_from_new_version ()
 
 #
 # Generates a new version of Jsoncat
-# 
+#
 new_version ()
 {
     get_current_version;
