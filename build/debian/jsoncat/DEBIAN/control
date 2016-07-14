@@ -1,0 +1,12 @@
+Package: jsoncat
+Version: 0.1-1
+Architecture: amd64
+Maintainer: Gustavo Pantuza <gustavopantuza@gmail.com>
+Installed-Size: 1
+Section: interpreters
+Priority: optional
+Homepage: https://github.com/pantuza/jsoncat
+Description: Json pretty-print parser based on a recursive lexical analyser.
+ The parser was based on the specification defined at [json.org](http://json.org).
+ The input file is parsed to build a json object.
+ If the object is correct, it will be pretty-printed to standard output.
