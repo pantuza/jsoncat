@@ -69,6 +69,7 @@ new_version ()
     get_new_version;
     update_version_on_src_file;
     update_version_on_spec_file;
+    # TODO: create the update_version_on_debian_files
     create_tag_from_new_version;
 }
 
