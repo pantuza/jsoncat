@@ -39,7 +39,7 @@ WARNS := -Wall -Wextra -pedantic # -pedantic warns on language standards
 # Flags for compiling
 CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
 
-# Debug options 
+# Debug options
 DEBUG := #-g3 -D DEBUG=1
 
 
