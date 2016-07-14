@@ -43,6 +43,11 @@ BUILDER := ${SCRIPTS}/builder.sh
 DPKGBUILD := $(shell which dpkg-buildpackage)
 
 
+# Git
+GIT := $(shell which git)
+
+
+
 #
 # Target rules to build and package the project
 #
@@ -59,6 +64,10 @@ tarfile:
 	@mv -v $(TGZ_FILE_NAME) $(OBS_DIR)/$(PROJECT_NAME);
 	@echo $(ECHO_OPTS) "\n--\nCreated project tarball at " \
 		"$(BROWN)$(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME)$(END_COLOR)\n";
+	$(GIT) add $(OBS_DIR)/$(PROJECT_NAME);
+	$(GIT) commit -m "Creating tarball: $(TGZ_FILE_NAME)";
+	$(GIT) push origin master;
+
 	
 new_version:
 	@. ${BUILDER} $@;
