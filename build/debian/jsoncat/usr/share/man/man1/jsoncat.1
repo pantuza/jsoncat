@@ -1,0 +1,59 @@
+.\" Manpage for jsoncat
+.\" Contact gustavopantuza@gmail.com to correct errors.
+.TH man 1 "10 November 2015"  "0.1.0" "jsoncat man page"
+.SH NAME
+jsoncat \- Json pretty-print parser based on a recursive lexical analyser 
+.SH SYNOPSIS
+jsoncat [OPTION]... [FILE]...
+.SH DESCRIPTION
+Json pretty-print parser based on a recursive lexical analyser.  The parser was based on the specification defined at json.org.  The input file is parsed to build a json object.  If the object is correct, it will be pretty-printed to  standard output.
+.SH OPTIONS
+.TP
+.B -h | --help
+Prints jsoncat help message
+.TP
+.B -v | --version
+Prints jsoncat version
+.SH USAGE
+.PP
+.nf
+.RS
+Jsoncat parses a json that comes from a pipe to stdin. For example, parsing a request:
+
+$\> curl -s "https://pantuza.com"/sample.json  --insecure | jsoncat
+
+{
+	'what': "A json example file",
+	'test':  true,
+	'values': [ 42, 10, 5.32],
+	'data': {
+		'name':  'Test Name',
+		'type': null
+	}
+}
+
+Or simple by passing a path to a json file as  follows:
+
+$\> jsoncat  tests/samples/input_06.json
+
+{
+	'age': 42,
+	'name': 'marvin',
+	'what': 'robot'
+}
+
+Or yet, again from stdin, by echoing a json:
+
+$\> echo "{'test': true}" | jsoncat
+
+{
+	'test': true
+}
+
+.RE
+.fi
+.PP
+.SH BUGS
+Report bugs to gustavopantuza@gmail.com
+.SH AUTHOR
+"Gustavo Pantuza" ("https://pantuza.com")
