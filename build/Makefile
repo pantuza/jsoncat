@@ -12,6 +12,8 @@ include ../Makefile.conf
 # OpenSUSE Build Studio directory
 OBS_DIR := home\:pantuza
 
+# Debian directory
+DEB_DIR := debian
 
 # Get the Opensuse build studio client program
 OSC := $(shell which osc)
@@ -88,7 +90,12 @@ rpm:
 # Build the project package for Debian distributions
 deb:
 	@echo $(ECHO_OPTS) "$(BROWN)Building Debian package$(END_COLOR)\n";
-	$(DPKGBUILD) -us -uc -d
+	@cp -v $(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME) $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION).orig.tar.gz
+	@tar -xzvf $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION).orig.tar.gz -C $(DEB_DIR)
+	@mv -vf $(DEB_DIR)/$(PROJECT_NAME) $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)
+	@mkdir -pv $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)/debian
+	@cp -v $(DEB_DIR)/{changelog,compat,control,rules,manpages} $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)/debian/
+	@cd $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION) && $(DPKGBUILD) -us -uc -d
 
 project:
 	@make -C ..
