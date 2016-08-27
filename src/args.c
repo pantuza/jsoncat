@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Gustavo Pantuza, 
+ *         Author:  Gustavo Pantuza,
  *   Organization:  Software Community
  *
  * ============================================================================
@@ -41,7 +41,7 @@ static void set_default_options(options_t* options)
 
 
 
-/* 
+/*
  * Finds the matching case of the current command line option
  */
 void
@@ -53,7 +53,7 @@ switch_options (int arg, options_t* options)
             options->help = true;
             help();
             exit(EXIT_SUCCESS);
-        
+
         case 'v':
             options->version = true;
             version();
@@ -119,7 +119,7 @@ jsoncat_options_parser (int argc, char* argv[], options_t* options)
 
     while (true)
     {
-        int option_index = 0;    
+        int option_index = 0;
         arg = getopt_long(argc, argv, "hvt:", long_options, &option_index);
 
         /* End of the options? */
