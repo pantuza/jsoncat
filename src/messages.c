@@ -43,7 +43,7 @@ help ()
 
 
 
-/* 
+/*
  * Jsoncat usage message
  *
  */
@@ -56,7 +56,7 @@ usage ()
 
 
 
-/* 
+/*
  * Jsoncat description message
  */
 void
@@ -84,12 +84,14 @@ options ()
                     "\t\tPrints this help message\n\n");
     fprintf(stdout, GRAY "\t--no-color\n" NO_COLOR
                     "\t\tDoes not prints json files using colors\n\n");
+    fprintf(stdout, GRAY "\t-t|--tab-stop\n" NO_COLOR
+                    "\t\tTabs are expanded as spaces. Default is 4\n\n");
 
 }
 
 
 
-/* 
+/*
  * Jsoncat author message
  *
  */
@@ -102,7 +104,7 @@ author ()
 
 
 
-/* 
+/*
  * Jsoncat version message
  *
  */
