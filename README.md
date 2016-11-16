@@ -9,6 +9,8 @@ The parser was based on the specification defined at [json.org](http://json.org)
 The input file is parsed to build a json object.
 If the object is correct, it will be pretty-printed to standard output.
 
+> Check out the [blog post](https://blog.pantuza.com/artigos/jsoncat-formatacao-json-no-terminal) about jsoncat [pt-BR]
+
 ### Usage
 Jsoncat parses a json that comes from a pipe to stdin. For example, parsing a request:
 ```bash
