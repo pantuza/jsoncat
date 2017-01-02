@@ -1,5 +1,8 @@
+[![Build Status](https://travis-ci.org/pantuza/jsoncat.svg?branch=master)](https://travis-ci.org/pantuza/jsoncat)
+
 Jsoncat
 =======
+
 ![alt text][jsoncat_logo]
 [jsoncat_logo]: https://github.com/pantuza/jsoncat/blob/master/img/jsoncat_logo.png "Jsoncat logo"
 
