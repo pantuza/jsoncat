@@ -1,3 +1,7 @@
 language: c
 
 script: make clean && make && make test
+
+compiler:
+  - clang
+  - gcc
