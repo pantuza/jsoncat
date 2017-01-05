@@ -34,7 +34,7 @@ STD := -std=gnu99 # See man gcc for more options
 STACK := -fstack-protector-all -Wstack-protector
 
 # Specifies to GCC the required warnings
-WARNS := -Wall -Wextra -pedantic # -pedantic warns on language standards 
+WARNS := -Wall -Wextra -pedantic # -pedantic warns on language standards
 
 # Flags for compiling
 CFLAGS := -O3 $(STD) $(STACK) $(WARNS)

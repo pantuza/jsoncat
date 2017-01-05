@@ -67,9 +67,9 @@ set_value (struct token *token, char value[])
 {
     unsigned int str_len = strlen(value);
 
-    /* 
+    /*
      * If the string value is longer than the DEFAULT_VALUE_LENGTH, we realloc
-     * the token value size. 
+     * the token value size.
      */
     if(str_len >= DEFAULT_VALUE_LENGTH) {
         str_len -= DEFAULT_VALUE_LENGTH;
@@ -96,7 +96,7 @@ update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
 
     inc_line(token, inc_l);
     inc_column(token, inc_c);
-    
+
     set_color(token, color);
     set_value(token, value);
 }
@@ -121,7 +121,7 @@ print_json_error (char json[])
 void
 add_token (struct token *token, options_t *options)
 {
-    /* There is 2 colors in the string: token->color and NO_COLOR */ 
+    /* There is 2 colors in the string: token->color and NO_COLOR */
     int colors_size = 2 * COLOR_STR_SIZE;
 
     int size = strlen(token->value) + colors_size;

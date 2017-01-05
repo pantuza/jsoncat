@@ -29,7 +29,7 @@ do
     ./${BINDIR}/${BINARY} $file_name &> ${LIMBO};
     assert_command $?;
 
-# We pass the result of ls as the stdin to the while. It makes the 
+# We pass the result of ls as the stdin to the while. It makes the
 # utils.sh variables referenced inside the while scope
 done < <(ls ${TESTDIR}/samples/*.json);
 

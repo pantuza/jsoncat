@@ -11,7 +11,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Gustavo Pantuza, 
+ *         Author:  Gustavo Pantuza,
  *   Organization:  Software Community
  *
  * ============================================================================
@@ -31,7 +31,7 @@
 
 
 
-/* 
+/*
  * Tries to open the input json file. Exits with failure in case of any error
  */
 FILE*
@@ -41,11 +41,11 @@ open_json_file (char filename[])
 
     if (strcmp(filename, "-") == 0) {
         file = stdin;
-        
+
     } else {
         file = fopen(filename, "r");
     }
-    
+
     if (!file) {
         fprintf(stderr, RED "Error on openning file '%s': %s\n" NO_COLOR,
                 filename, strerror(errno));
@@ -108,7 +108,7 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case OBJECT_CLOSE:
         {
-            parse_object_close(token, n_tabs, options->tab_stop); 
+            parse_object_close(token, n_tabs, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -154,7 +154,7 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case STRING_0:
         case STRING_1:
-        { 
+        {
             char value[DEFAULT_VALUE_LENGTH];
             parse_string(token, character, value, file);
             add_token(token, options);
@@ -185,7 +185,7 @@ match_symbol(char character, struct token *token, FILE *file,
             match_symbol(next_char, token, file, n_tabs, in_array, options);
             break;
         }
-        
+
         case 'f':
         {
             parse_false_token(token, file);
@@ -195,7 +195,7 @@ match_symbol(char character, struct token *token, FILE *file,
             match_symbol(next_char, token, file, n_tabs, in_array, options);
             break;
         }
-        
+
         case 'n':
         {
             parse_null_token(token, file);

@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Gustavo Pantuza, 
+ *         Author:  Gustavo Pantuza,
  *   Organization:  Software Community
  *
  * =====================================================================================

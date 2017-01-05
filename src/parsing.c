@@ -3,7 +3,7 @@
  *
  *       Filename:  parsing.c
  *
- *    Description:  File responsible of the syntactic analysis of the json 
+ *    Description:  File responsible of the syntactic analysis of the json
  *                  object
  *
  *        Version:  1.0
@@ -11,7 +11,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Gustavo Pantuza, 
+ *         Author:  Gustavo Pantuza,
  *   Organization:  Software Community
  *
  * ============================================================================
@@ -33,7 +33,7 @@
 void
 parse_object(struct token *token,
              char value[DEFAULT_VALUE_LENGTH], int *n_tabs, int tabstop)
-{ 
+{
     *n_tabs += 1;
 
     value[0] = OBJECT_OPEN;
@@ -55,7 +55,7 @@ parse_object(struct token *token,
  * Parse the object close token
  */
 void
-parse_object_close(struct token *token, int *n_tabs, int tabstop) 
+parse_object_close(struct token *token, int *n_tabs, int tabstop)
 {
     /* Allocates the default value size */
     char *value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
@@ -68,7 +68,7 @@ parse_object_close(struct token *token, int *n_tabs, int tabstop)
         expandtab(tab_str, *n_tabs, tabstop);
         strncat(value, tab_str, EXPANDTAB_SIZE);
     }
-    
+
     char to_append[2] = {OBJECT_CLOSE, '\0'};
 
     /* If necessary, we realloc the string */
@@ -165,7 +165,7 @@ parse_string (struct token *token, char character,
 
     while (!is_string_end(character, curr_char, prev_char))
     {
-        strncat(value, &curr_char, 1); 
+        strncat(value, &curr_char, 1);
 
         if(curr_char == EOF) {
             fprintf(stdout, RED "Malformed string\n" NO_COLOR);
@@ -175,8 +175,8 @@ parse_string (struct token *token, char character,
         prev_char = curr_char;
         curr_char = getc(file);
     }
-    
-    strncat(value, &curr_char, 1); 
+
+    strncat(value, &curr_char, 1);
     update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 
@@ -223,7 +223,7 @@ parse_false_token (struct token *token, FILE *file)
 
         next_char = getc(file);
         if(!(next_char == value[i])) {
-            fprintf(stderr, RED "Error on parsing the 'false' token value\n" 
+            fprintf(stderr, RED "Error on parsing the 'false' token value\n"
                     NO_COLOR);
             exit(EXIT_FAILURE);
         }
@@ -264,7 +264,7 @@ parse_null_token (struct token *token, FILE *file)
  * Get valid number value
  */
 bool
-is_part_of_a_number(char character) 
+is_part_of_a_number(char character)
 {
     switch (character) {
 
@@ -344,7 +344,7 @@ parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
             strncat(value, tab_str, EXPANDTAB_SIZE);
         }
     } else {
-        /* If inside an array, separate elements with a single space */ 
+        /* If inside an array, separate elements with a single space */
         value[1] = ' ';
         value[2] = '\0';
     }
