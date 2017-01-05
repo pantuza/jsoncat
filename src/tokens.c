@@ -121,7 +121,7 @@ print_json_error (char json[])
 void
 add_token (struct token *token, options_t *options)
 {
-    /* There is 2 colors in the string: token->color and NO_COLOR */
+    /* There are 2 colors in the string: token->color and NO_COLOR */
     int colors_size = 2 * COLOR_STR_SIZE;
 
     int size = strlen(token->value) + colors_size;
