@@ -116,6 +116,10 @@ valgrind:
 run: $(BINDIR)/$(BINARY)
 	@./$^ $(TESTSDIR)/samples/input_06.json
 
+# Debugs jsoncat using gdb
+debug:
+	gdb --args $(BINDIR)/$(BINARY) tests/samples/input_06.json
+
 
 # Rule for cleaning the project
 clean:
