@@ -155,22 +155,17 @@ is_string_end(char string_open_char, char curr_char, char prev_char)
  */
 void
 parse_string (struct token *token, char character,
-              char **value, FILE *file)
+              char value[DEFAULT_VALUE_LENGTH], FILE *file)
 {
-    strncat(*value, &character, 1);
+    strncat(value, &character, 1);
 
     char prev_char = character;
     char curr_char = getc(file);
 
-    int size = 2;
-    int expand = 1;
     while (!is_string_end(character, curr_char, prev_char))
     {
-        strncat(*value, &curr_char, 1);
 
-        if(size == (expand++ * DEFAULT_VALUE_LENGTH) - 1) {
-            *value = (char *) realloc(*value, expand * DEFAULT_VALUE_LENGTH * sizeof(char));
-        }
+        strncat(value, &curr_char, 1);
 
         if(curr_char == EOF) {
             fprintf(stdout, RED "Malformed string\n" NO_COLOR);
@@ -179,12 +174,10 @@ parse_string (struct token *token, char character,
 
         prev_char = curr_char;
         curr_char = getc(file);
-
-        size++;
     }
 
-    strncat(*value, &curr_char, 1);
-    update_token(token, STRING_TOKEN, NO_COLOR, *value, 1, 4);
+    strncat(value, &curr_char, 1);
+    update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
 }
 
 
