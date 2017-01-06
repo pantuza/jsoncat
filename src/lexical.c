@@ -155,8 +155,8 @@ match_symbol(char character, struct token *token, FILE *file,
         case STRING_0:
         case STRING_1:
         {
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_string(token, character, value, file);
+            char *value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+            parse_string(token, character, &value, file);
             add_token(token, options);
 
             char next_char = getc(file);
