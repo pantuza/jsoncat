@@ -66,20 +66,6 @@ void
 set_value (struct token *token, char value[])
 {
     unsigned int str_len = strlen(value);
-
-    /*
-     * If the string value is longer than the DEFAULT_VALUE_LENGTH, we realloc
-     * the token value size.
-     */
-    if(str_len >= DEFAULT_VALUE_LENGTH) {
-        str_len -= DEFAULT_VALUE_LENGTH;
-
-        if(!realloc(token->value, str_len)) {
-            fprintf(stderr, RED "Realloc string size error\n" NO_COLOR);
-            exit(EXIT_FAILURE);
-        }
-    }
-
     strncpy(token->value, value, str_len + 1);
 }
 
