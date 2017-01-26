@@ -32,7 +32,7 @@
  */
 void
 parse_object(struct token *token,
-             char value[DEFAULT_VALUE_LENGTH], int *n_tabs, int tabstop)
+             char value[], int *n_tabs, int tabstop)
 {
     *n_tabs += 1;
 
@@ -92,7 +92,7 @@ parse_object_close(struct token *token, int *n_tabs, int tabstop)
  */
 void
 parse_array_open (struct token *token,
-             int *n_tabs, char value[DEFAULT_VALUE_LENGTH], int tabstop)
+             int *n_tabs, char value[], int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -115,7 +115,7 @@ parse_array_open (struct token *token,
  * Parse array close
  */
 void parse_array_close (struct token *token, int *n_tabs,
-                        char value[DEFAULT_VALUE_LENGTH], int tabstop)
+                        char value[], int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -155,7 +155,7 @@ is_string_end(char string_open_char, char curr_char, char prev_char)
  */
 void
 parse_string (struct token *token, char character,
-              char value[DEFAULT_VALUE_LENGTH], FILE *file)
+              char value[], FILE *file)
 {
     strncat(value, &character, 1);
 
@@ -291,7 +291,7 @@ is_part_of_a_number(char character)
  */
 void
 parse_number (struct token *token, char character,
-              char value[DEFAULT_VALUE_LENGTH], FILE *file)
+              char value[], FILE *file)
 {
     value[0] = character;
     value[1] = '\0';
@@ -326,7 +326,7 @@ parse_pair_separator (struct token *token)
  * Value separator parser
  */
 void
-parse_value_separator (struct token *token, char value[DEFAULT_VALUE_LENGTH],
+parse_value_separator (struct token *token, char value[],
                        int n_tabs, bool inside_array, int tabstop)
 {
     value[0] = VALUE_SEPARATOR;
