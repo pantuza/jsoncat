@@ -80,7 +80,7 @@ struct token
     /* Color string */
     char color[COLOR_STR_SIZE];
     /* The value read that identifies the token */
-    char value[DEFAULT_VALUE_LENGTH];
+    char *value;
 };
 
 
@@ -90,11 +90,11 @@ struct token
 void inc_line(struct token *token, int inc_size);
 void inc_column (struct token *token, int inc_size);
 void set_color (struct token *token, char color[COLOR_STR_SIZE]);
-void set_value (struct token *token, char value[DEFAULT_VALUE_LENGTH]);
+void set_value (struct token *token, char *value);
 
 
 void update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
-              char value[DEFAULT_VALUE_LENGTH], int inc_line, int inc_column);
+              char *value, int inc_line, int inc_column);
 void add_token (struct token *token, options_t *options);
 void expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs, int tabstop);
 
