@@ -177,7 +177,7 @@ parse_string (struct token *token, char character,
     }
 
     strncat(value, &curr_char, 1);
-    update_token(token, STRING_TOKEN, NO_COLOR, value, 1, 4);
+    update_token(token, STRING_TOKEN, GREEN, value, 1, 4);
 }
 
 
