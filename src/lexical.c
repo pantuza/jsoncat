@@ -153,6 +153,12 @@ match_symbol(char character, struct token *token, FILE *file,
         }
 
         case STRING_0:
+        {
+            fprintf(stderr, RED "Json format do not allows single quotes: '\n"
+                            NO_COLOR);
+            exit(EXIT_FAILURE);
+            break;
+        }
         case STRING_1:
         {
             char value[DEFAULT_VALUE_LENGTH];
