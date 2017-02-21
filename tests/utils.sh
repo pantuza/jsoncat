@@ -174,8 +174,7 @@ has_value ()
                  "${END_COLOR}\n";
         exit 1;
     }
-
-    echo -en "{'test': $1}" | ${BINDIR}/${BINARY} | grep -F $2 &> ${LIMBO}
+    echo -en "{\"test\": $1}" | ${BINDIR}/${BINARY} | grep -F $2 &> ${LIMBO}
 }
 
 
