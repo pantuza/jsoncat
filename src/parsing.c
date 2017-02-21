@@ -157,7 +157,8 @@ void
 parse_string (struct token *token, char character,
               char value[], FILE *file)
 {
-    strncat(value, &character, 1);
+    value[0] = character;
+    value[1] = '\0';
 
     char prev_char = character;
     char curr_char = getc(file);
