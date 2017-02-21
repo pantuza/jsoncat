@@ -60,7 +60,7 @@ assert_command $?;
 # Verifies the use of stdin as the input json
 #
 test_message "Use stdin as the input json to parse";
-echo "{'test': true}" | ${BINDIR}/${BINARY} &> ${LIMBO};
+echo '{"test": true}' | ${BINDIR}/${BINARY} &> ${LIMBO};
 assert_command $?;
 
 
