@@ -53,9 +53,9 @@ assert_command $?;
 #
 # Tests an array of strings
 #
-CONST="[ 'x', 'y', 'z']";
+CONST="[ \"x\", \"y\", \"z\"]";
 test_message "Parsing an array of strings";
-has_value "['x', 'y', 'z']" $CONST;
+has_value "[\"x\", \"y\", \"z\"]" $CONST;
 assert_command $?;
 
 
@@ -63,9 +63,9 @@ assert_command $?;
 #
 # Tests an array with escaped string
 #
-CONST="[ '\bbla', 'a', 'b']";
+CONST="[ \"\bbla\", \"a\", \"b\"]";
 test_message "Parsing an array with escaped string";
-has_value "['\bbla', 'a', 'b']" $CONST;
+has_value "[\"\bbla\", \"a\", \"b\"]" $CONST;
 assert_command $?;
 
 
@@ -95,7 +95,7 @@ assert_command $?;
 #
 CONST="{";
 test_message "Parsing an array with an object";
-has_value "[{'test': true}]" $CONST;
+has_value "[{\"test\": true}]" $CONST;
 assert_command $?;
 
 
@@ -103,9 +103,9 @@ assert_command $?;
 #
 # Tests an array with many different types of values
 #
-CONST="[ 1.0, 'string', true, false, null]";
+CONST="[ 1.0, \"string\", true, false, null]";
 test_message "Parsing an array with different types of values";
-has_value "[1.0, 'string', true, false, null, {}]" $CONST;
+has_value "[1.0, \"string\", true, false, null, {}]" $CONST;
 assert_command $?;
 
 
