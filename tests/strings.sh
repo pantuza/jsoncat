@@ -23,9 +23,9 @@ start_message "Parsing strings";
 #
 # Tests an empty string
 #
-STR="''";
+STR="\"\"";
 test_message "Parsing an empty string";
-has_str "" $STR;
+has_str "\"\"" $STR;
 assert_command $?;
 
 #
@@ -40,9 +40,9 @@ assert_command $?;
 #
 # Tests a string with an object
 #
-STR='{"a":10}';
+STR="\"{\\\"a\\\":10}\"";
 test_message "Parsing a string with an object";
-has_str '{"a":10}' $STR;
+has_str "\"{\\\"a\\\":10}\"" $STR;
 assert_command $?;
 
 
@@ -50,9 +50,9 @@ assert_command $?;
 #
 # Tests a string with an array
 #
-STR="[10, 12.2, 23]";
+STR="\"[10, 12.2, 23]\"";
 test_message "Parsing a string with an array";
-has_str "[10, 12.2, 23]" $STR;
+has_str "\"[10, 12.2, 23]\"" $STR;
 assert_command $?;
 
 
@@ -98,21 +98,11 @@ assert_command $?;
 
 
 #
-# Tests a string with escaped text
-#
-STR="\'string\'";
-test_message "Parsing a escaped string \'";
-has_str "\'string\'" $STR;
-assert_command $?;
-
-
-
-#
 # Tests a string with lots of string open characters
 #
-STR='""""""""""';
+STR="\"''''''''''\"";
 test_message "Parsing a string lots of string open characters";
-has_str '""""""""""' $STR;
+has_str "\"''''''''''\"" $STR;
 assert_command $?;
 
 
@@ -120,9 +110,9 @@ assert_command $?;
 #
 # Tests a string with special characters
 #
-STR="!@#$%ˆ&*()-=_+";
+STR="\"!@#$%ˆ&*()-=_+\"";
 test_message "Parsing a string special characters";
-has_str "!@#$%ˆ&*()-=_+" $STR;
+has_str "\"!@#$%ˆ&*()-=_+\"" $STR;
 assert_command $?;
 
 
@@ -130,9 +120,9 @@ assert_command $?;
 #
 # Tests a string with escaped back slash
 #
-STR="\\////";
+STR="\"\\////\"";
 test_message "Parsing a string with escaped back slash";
-has_str "\\////" $STR;
+has_str "\"\\////\"" $STR;
 assert_command $?;
 
 
