@@ -154,8 +154,7 @@ is_string_end(char string_open_char, char curr_char, char prev_char)
  * String parser
  */
 void
-parse_string (struct token *token, char character,
-              char value[], FILE *file)
+parse_string (struct token *token, char character, char value[], FILE *file)
 {
     value[0] = character;
     value[1] = '\0';
