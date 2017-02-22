@@ -32,7 +32,7 @@
  */
 void
 parse_object(struct token *token,
-             char value[], int *n_tabs, int tabstop)
+             char value[], int *n_tabs, unsigned int tabstop)
 {
     *n_tabs += 1;
 
@@ -55,7 +55,7 @@ parse_object(struct token *token,
  * Parse the object close token
  */
 void
-parse_object_close(struct token *token, int *n_tabs, int tabstop)
+parse_object_close(struct token *token, int *n_tabs, unsigned int tabstop)
 {
     /* Allocates the default value size */
     char *value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
@@ -92,7 +92,7 @@ parse_object_close(struct token *token, int *n_tabs, int tabstop)
  */
 void
 parse_array_open (struct token *token,
-             int *n_tabs, char value[], int tabstop)
+             int *n_tabs, char value[], unsigned int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -115,7 +115,7 @@ parse_array_open (struct token *token,
  * Parse array close
  */
 void parse_array_close (struct token *token, int *n_tabs,
-                        char value[], int tabstop)
+                        char value[], unsigned int tabstop)
 {
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
@@ -327,7 +327,7 @@ parse_pair_separator (struct token *token)
  */
 void
 parse_value_separator (struct token *token, char value[],
-                       int n_tabs, bool inside_array, int tabstop)
+                       int n_tabs, bool inside_array, unsigned int tabstop)
 {
     value[0] = VALUE_SEPARATOR;
     value[1] = '\0';
