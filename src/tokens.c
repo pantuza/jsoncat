@@ -65,8 +65,10 @@ set_color (struct token *token, char color[COLOR_STR_SIZE])
 void
 set_value (struct token *token, char value[])
 {
+    token->value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     unsigned int str_len = strlen(value);
-    strncpy(token->value, value, str_len + 1);
+    strncpy(token->value, value, str_len);
 }
 
 
