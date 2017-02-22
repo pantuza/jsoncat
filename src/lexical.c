@@ -249,7 +249,7 @@ start_parsing (options_t* options)
 
     FILE *file = open_json_file(options->file_name);
 
-    struct token token;
+    static struct token token;
     token.line = 0;
     token.column = 0;
     find_token(file, &token, options);
