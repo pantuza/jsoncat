@@ -217,7 +217,6 @@ match_symbol(char character, struct token *token, FILE *file,
 }
 
 
-
 /*
  * Search for tokens on the opened json file
  */
@@ -226,14 +225,30 @@ find_token (FILE *file, struct token *token, options_t *options)
 {
     int n_tabs = 0;
     bool in_array = false;
-    char character;
 
+    /* Gets the first character */
+    char character = getc(file);
+
+    /* Validates if the json inicialization is correct */
+    if(character != OBJECT_OPEN && character != ARRAY_OPEN)
+    {
+        fprintf(stderr, RED "Json must start with "
+                        "'" GRAY "%c" RED
+                        "' or '" GRAY "%c" RED "'."
+                        " Character '" GRAY "%c" RED
+                        "' is not valid.\n" NO_COLOR,
+                        OBJECT_OPEN, ARRAY_OPEN, character);
+        exit(EXIT_FAILURE);
+    }
+
+    /* Recusively parses json stream */
     do {
-        /* Gets the character */
-        character = getc(file);
 
         /* matches the token with an Json symbol */
         match_symbol(character, token, file, &n_tabs, &in_array, options);
+
+        /* Gets the next char */
+        character = getc(file);
 
     } while (character != EOF);
 }
