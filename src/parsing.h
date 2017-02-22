@@ -29,7 +29,7 @@
 
 void parse_object (struct token *token,
                    char value[], int *n_tabs, unsigned int tabstop);
-void parse_object_close(struct token *token, int *n_tabs,
+void parse_object_close(struct token *token, char value[], int *n_tabs,
                         unsigned int tabstop);
 void parse_array_open (struct token *token, int *n_tabs,
                        char value[], unsigned int tabstop);
