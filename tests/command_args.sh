@@ -78,7 +78,7 @@ assert_command_fail $?;
 # Tests a valid json input file
 #
 test_message "Parse a valid json input file";
-./${BINDIR}/${BINARY} "tests/samples/input_06.json" &> ${LIMBO};
+./${BINDIR}/${BINARY} "tests/samples/ok/input_05.json" &> ${LIMBO};
 assert_command $?;
 
 
@@ -87,7 +87,7 @@ assert_command $?;
 # Verifies --no-color option
 #
 test_message "Should not print colors characteres";
-./${BINDIR}/${BINARY} --no-color "tests/samples/input_06.json" \
+./${BINDIR}/${BINARY} --no-color "tests/samples/ok/input_05.json" \
     | grep "37m" &> ${LIMBO};
 assert_command_fail $?;
 
@@ -97,7 +97,7 @@ assert_command_fail $?;
 # Verifies --no-color option
 #
 test_message "Should print colors characteres";
-./${BINDIR}/${BINARY} "tests/samples/input_06.json" | grep "37m" &> ${LIMBO};
+./${BINDIR}/${BINARY} "tests/samples/ok/input_05.json" | grep "37m" &> ${LIMBO};
 assert_command $?;
 
 
@@ -106,7 +106,7 @@ assert_command $?;
 # Verifies --tab-stop option
 #
 test_message "Should print an error when no tabstop is informed";
-./${BINDIR}/${BINARY} "tests/samples/input_06.json" --tab-stop 2>&1 >${LIMBO} \
+./${BINDIR}/${BINARY} "tests/samples/ok/input_05.json" --tab-stop 2>&1 >${LIMBO} \
     | grep "requires" &> ${LIMBO};
 assert_command $?;
 
@@ -116,7 +116,7 @@ assert_command $?;
 # Verifies --tab-stop option with default tab space
 #
 test_message "Should not have 8 spaces when using default tab space";
-./${BINDIR}/${BINARY} "tests/samples/input_06.json" \
+./${BINDIR}/${BINARY} "tests/samples/ok/input_05.json" \
     | grep "        " &> ${LIMBO};
 assert_command_fail $?;
 
@@ -126,7 +126,7 @@ assert_command_fail $?;
 # Verifies --tab-stop been equal 8 spaces
 #
 test_message "Should print json tabulation using 8 spaces";
-./${BINDIR}/${BINARY} "tests/samples/input_06.json" --tab-stop 8 \
+./${BINDIR}/${BINARY} "tests/samples/ok/input_05.json" --tab-stop 8 \
     | grep "        " &> ${LIMBO};
 assert_command $?;
 
