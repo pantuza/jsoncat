@@ -31,7 +31,8 @@ int
 main (int argc, char* argv[])
 {
     /* Read command line options */
-    options_t options;
+    static options_t options;
+
     jsoncat_options_parser(argc, argv, &options);
 
 #ifdef DEBUG
