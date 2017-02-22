@@ -58,13 +58,13 @@
 
 
 /* Switch tabs with spaces */
-#define EXPANDTAB   ""
+#define EXPANDTAB ""
 
 /* expanded tabs string size */
-#define EXPANDTAB_SIZE  256
+#define EXPANDTAB_SIZE 64
 
 /* Default tabstop */
-#define TABSTOP     4
+#define TABSTOP 4
 
 /*
  * Types used by the lexical analiser
