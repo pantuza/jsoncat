@@ -96,7 +96,7 @@ void set_value (struct token *token, char *value);
 void update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
               char *value, int inc_line, int inc_column);
 void add_token (struct token *token, options_t *options);
-void expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs, int tabstop);
+void expandtab (char tab_str[EXPANDTAB_SIZE], int n_tabs, unsigned int tabstop);
 
 
 #endif // TOKENS_H
