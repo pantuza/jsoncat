@@ -27,21 +27,17 @@
 #include "tokens.h"
 
 
-void parse_object (struct token *token,
-                   char value[], int *n_tabs, unsigned int tabstop);
-void parse_object_close(struct token *token, char value[], int *n_tabs,
+void parse_object (struct token *token, int *n_tabs, unsigned int tabstop);
+void parse_object_close(struct token *token, int *n_tabs,
                         unsigned int tabstop);
-void parse_array_open (struct token *token, int *n_tabs,
-                       char value[], unsigned int tabstop);
+void parse_array_open (struct token *token, int *n_tabs, unsigned int tabstop);
 void parse_array_close (struct token *token, int *n_tabs,
-                        char value[], unsigned int tabstop);
-void parse_string (struct token *token, char character,
-                   char value[], FILE *file);
+                        unsigned int tabstop);
+void parse_string (struct token *token, char character, FILE *file);
 void parse_pair_separator (struct token *token);
-void parse_value_separator (struct token *token, char value[], int n_tabs,
+void parse_value_separator (struct token *token, int n_tabs,
                             bool inside_array, unsigned int tabstop);
-void parse_number (struct token *token, char character,
-                   char value[], FILE *file);
+void parse_number (struct token *token, char character, FILE *file);
 void parse_true_token (struct token *token, FILE *file);
 void parse_false_token (struct token *token, FILE *file);
 void parse_null_token (struct token *token, FILE *file);
