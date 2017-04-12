@@ -87,9 +87,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case OBJECT_OPEN:
         {
             *in_array = false;
-            char value[DEFAULT_VALUE_LENGTH];
-
-            parse_object(token, value, n_tabs, options->tab_stop);
+            parse_object(token, n_tabs, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -109,8 +107,7 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case OBJECT_CLOSE:
         {
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_object_close(token, value, n_tabs, options->tab_stop);
+            parse_object_close(token, n_tabs, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -120,9 +117,8 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case ARRAY_OPEN:
         {
-            char value[DEFAULT_VALUE_LENGTH];
             *in_array = true;
-            parse_array_open(token, n_tabs, value, options->tab_stop);
+            parse_array_open(token, n_tabs, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -132,9 +128,8 @@ match_symbol(char character, struct token *token, FILE *file,
 
         case VALUE_SEPARATOR:
         {
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_value_separator(token, value,
-                                  *n_tabs, *in_array, options->tab_stop);
+            parse_value_separator(token,*n_tabs, 
+                                  *in_array, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -145,8 +140,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case ARRAY_CLOSE:
         {
             *in_array = false;
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_array_close(token, n_tabs, value, options->tab_stop);
+            parse_array_close(token, n_tabs, options->tab_stop);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -163,8 +157,7 @@ match_symbol(char character, struct token *token, FILE *file,
         }
         case STRING_1:
         {
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_string(token, character, value, file);
+            parse_string(token, character, file);
             add_token(token, options);
 
             char next_char = getc(file);
@@ -175,8 +168,7 @@ match_symbol(char character, struct token *token, FILE *file,
         case '-':
         case ((char) NUMBER):
         {
-            char value[DEFAULT_VALUE_LENGTH];
-            parse_number(token, char_cpy, value, file);
+            parse_number(token, char_cpy, file);
             add_token(token, options);
 
             char next_char = getc(file);
