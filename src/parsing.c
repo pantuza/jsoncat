@@ -31,9 +31,10 @@
  * Object parser
  */
 void
-parse_object(struct token *token,
-             char value[], int *n_tabs, unsigned int tabstop)
+parse_object(struct token *token, int *n_tabs, unsigned int tabstop)
 {
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     *n_tabs += 1;
 
     value[0] = OBJECT_OPEN;
@@ -48,6 +49,7 @@ parse_object(struct token *token,
     }
 
     update_token(token, OBJECT_OPEN, GRAY, value, 0, 1);
+    free(value);
 }
 
 
@@ -56,9 +58,11 @@ parse_object(struct token *token,
  * Parse the object close token
  */
 void
-parse_object_close(struct token *token, char value[],
-                   int *n_tabs, unsigned int tabstop)
+parse_object_close(struct token *token, int *n_tabs, unsigned int tabstop)
 {
+
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     *n_tabs -= 1;
 
     value[0] = '\n';
@@ -76,6 +80,7 @@ parse_object_close(struct token *token, char value[],
     strncat(value, to_append, strlen(to_append));
 
     update_token(token, OBJECT_CLOSE, GRAY, value, 1, 0);
+    free(value);
 }
 
 
@@ -84,9 +89,11 @@ parse_object_close(struct token *token, char value[],
  * Array parser open
  */
 void
-parse_array_open (struct token *token,
-             int *n_tabs, char value[], unsigned int tabstop)
+parse_array_open (struct token *token, int *n_tabs, unsigned int tabstop)
 {
+
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
     if(token->type == ARRAY_OPEN){
@@ -101,15 +108,18 @@ parse_array_open (struct token *token,
     value[++size] = '\0';
 
     update_token(token, ARRAY_OPEN, GRAY, value, 0, 1);
+    free(value);
 }
 
 
 /*
  * Parse array close
  */
-void parse_array_close (struct token *token, int *n_tabs,
-                        char value[], unsigned int tabstop)
+void parse_array_close (struct token *token, int *n_tabs, unsigned int tabstop)
 {
+
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     memset(value, 0, DEFAULT_VALUE_LENGTH);
 
     if(token->type == ARRAY_CLOSE) {
@@ -124,6 +134,7 @@ void parse_array_close (struct token *token, int *n_tabs,
     value[++size] = '\0';
 
     update_token(token, ARRAY_CLOSE, GRAY, value, 1, 0);
+    free(value);
 }
 
 
@@ -147,8 +158,9 @@ is_string_end(char string_open_char, char curr_char, char prev_char)
  * String parser
  */
 void
-parse_string (struct token *token, char character, char value[], FILE *file)
+parse_string (struct token *token, char character, FILE *file)
 {
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
     value[0] = character;
     value[1] = '\0';
 
@@ -171,6 +183,7 @@ parse_string (struct token *token, char character, char value[], FILE *file)
 
     strncat(value, &curr_char, 1);
     update_token(token, STRING_TOKEN, GREEN, value, 1, 4);
+    free(value);
 }
 
 
@@ -283,9 +296,11 @@ is_part_of_a_number(char character)
  * Number parser
  */
 void
-parse_number (struct token *token, char character,
-              char value[], FILE *file)
+parse_number (struct token *token, char character, FILE *file)
 {
+
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     value[0] = character;
     value[1] = '\0';
 
@@ -299,6 +314,7 @@ parse_number (struct token *token, char character,
 
     ungetc(next_char, file);
     update_token(token, NUMBER, RED, value, 0, 1);
+    free(value);
 }
 
 
@@ -319,9 +335,12 @@ parse_pair_separator (struct token *token)
  * Value separator parser
  */
 void
-parse_value_separator (struct token *token, char value[],
+parse_value_separator (struct token *token,
                        int n_tabs, bool inside_array, unsigned int tabstop)
 {
+
+    char* value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
+
     value[0] = VALUE_SEPARATOR;
     value[1] = '\0';
 
@@ -343,4 +362,5 @@ parse_value_separator (struct token *token, char value[],
     }
 
     update_token(token, VALUE_SEPARATOR, BROWN, value, 1, 0);
+    free(value);
 }
