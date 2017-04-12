@@ -3,8 +3,7 @@
 Jsoncat
 =======
 
-![alt text][jsoncat_logo]
-[jsoncat_logo]: https://github.com/pantuza/jsoncat/blob/master/img/jsoncat_logo.png "Jsoncat logo"
+![jsoncat_logo](https://raw.githubusercontent.com/pantuza/jsoncat/master/img/jsoncat_logo.png "Jsoncat logo")
 
 ### Description
 Json pretty-print parser based on a recursive lexical analyser. 
