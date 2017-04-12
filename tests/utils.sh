@@ -184,5 +184,5 @@ has_value ()
 #
 has_str ()
 {
-    has_value "$1" $2
+    has_value "$1" "$2"
 }
