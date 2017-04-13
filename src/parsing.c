@@ -167,9 +167,14 @@ parse_string (struct token *token, char character, FILE *file)
     char prev_char = character;
     char curr_char = getc(file);
 
+    int i = 1;
     while (!is_string_end(character, curr_char, prev_char))
     {
-
+        if(strlen(value) == (unsigned int) i * DEFAULT_VALUE_LENGTH - 1) {
+            char* tmp = realloc(value, (++i * DEFAULT_VALUE_LENGTH) * sizeof(char));
+            value = tmp;
+            tmp = NULL;
+        }
         strncat(value, &curr_char, 1);
 
         if(curr_char == EOF) {
@@ -180,7 +185,6 @@ parse_string (struct token *token, char character, FILE *file)
         prev_char = curr_char;
         curr_char = getc(file);
     }
-
     strncat(value, &curr_char, 1);
     update_token(token, STRING_TOKEN, GREEN, value, 1, 4);
     free(value);
