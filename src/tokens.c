@@ -65,10 +65,9 @@ set_color (struct token *token, char color[COLOR_STR_SIZE])
 void
 set_value (struct token *token, char value[])
 {
-    free(token->value);
     token->value = malloc(DEFAULT_VALUE_LENGTH * sizeof(char));
 
-    unsigned int str_len = strlen(value);
+    unsigned int str_len = strlen(value) + 1;  // For null termination '\n'
     strncpy(token->value, value, str_len);
 }
 
@@ -87,6 +86,8 @@ update_token (struct token *token, int type, char color[COLOR_STR_SIZE],
     inc_column(token, inc_c);
 
     set_color(token, color);
+
+    free(token->value);
     set_value(token, value);
 }
 
@@ -114,7 +115,7 @@ add_token (struct token *token, options_t *options)
     int colors_size = 2 * COLOR_STR_SIZE;
 
     int size = strlen(token->value) + colors_size;
-    char value[size];
+    char* value = malloc(size);
 
     if(options->use_colors) {
 
@@ -128,6 +129,7 @@ add_token (struct token *token, options_t *options)
     if(token->type == TOKEN_ERROR) {
         print_json_error(value);
     }
+    free(value);
 }
 
 
