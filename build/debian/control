@@ -2,12 +2,13 @@ Source: jsoncat
 Section: interpreters
 Priority: optional
 Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.8
 Maintainer: Gustavo Pantuza <gustavopantuza@gmail.com>
 Homepage: https://github.com/pantuza/jsoncat
 
 Package: jsoncat
-Architecture: all
+Architecture: any
 Description: Json pretty-print parser based on a recursive lexical analyser.
- The parser was based on the specification defined at [json.org](http://json.org).
+ The parser was based on the specification defined at http://json.org.
  The input file is parsed to build a json object.
  If the object is correct, it will be pretty-printed to standard output.

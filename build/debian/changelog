@@ -1,5 +1,5 @@
-jsoncat (0.1-1) stable; urgency=low
+jsoncat (0.1.2-1) stable; urgency=low
 
   * Initial Release
 
- -- Gustavo Pantuza <gustavopantuza@gmail.com>  Mon, 30 Jan 2016 19:40:22 +0100
+ -- Gustavo Pantuza <gustavopantuza@gmail.com>  Sat, 30 Jan 2016 20:40:22 +0000

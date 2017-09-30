@@ -161,3 +161,15 @@ objects_test: $(TESTSDIR)/objects.sh
 # Rule to run samples parsing test
 samples_test: $(TESTSDIR)/samples.sh
 	@$(SHELL) $^
+
+deb:
+	@mkdir build/$(PROJECT_NAME)-$(VERSION)
+	@rsync -avrptP ./ --exclude=*.git* --exclude=build/ build/$(PROJECT_NAME)-$(VERSION)
+	@rm -rf build/$(PROJECT_NAME)-$(VERSION)/build
+	@cd build && tar -zcf $(PROJECT_NAME)_$(VERSION).orig.tar.gz $(PROJECT_NAME)-$(VERSION)
+	@cp -r build/debian build/$(PROJECT_NAME)-$(VERSION)
+	@cd build/$(PROJECT_NAME)-$(VERSION) \
+		&& debuild -uc -us --source-option=--include-binaries --source-option=-isession
+
+debclean:
+	@rm -rf build/$(PROJECT_NAME)-$(VERSION)*

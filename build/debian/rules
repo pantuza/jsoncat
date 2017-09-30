@@ -3,39 +3,14 @@
 # GNU copyright 1997 to 1999 by Joey Hess.
 
 # Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+export DH_VERBOSE=1
 
 # This is the debhelper compatibility version to use.
 
-CFLAGS = -g
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-CFLAGS += -O0
-else
-CFLAGS += -O2
-endif
+%:
+	dh $@
 
-build: build-stamp
-build-stamp:
-	make
-	touch build-stamp
+override_dh_auto_install:
+	install -d debian/jsoncat
+	install -D bin/jsoncat debian/jsoncat/usr/bin/jsoncat
 
-clean:
-	rm -f build-stamp
-	make clean || true
-
-install: build
-	make install
-	#make install DESTDIR=/usr/src/packages/BUILD/debian/ace
-
-# Build architecture-independent files here.
-binary-indep: build
-    # We have nothing to do by default.
-
-# Build architecture-dependent files here.
-binary-arch: build
-	dh_installman
-	dh_installdeb
-	dh_md5sums
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install

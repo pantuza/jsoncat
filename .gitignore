@@ -43,3 +43,4 @@ log/*
 # Debian build files
 build-stamp
 build/deb/jsoncat.debhelper.log
+build/jsoncat**
