@@ -37,7 +37,7 @@ STACK := -fstack-protector-all -Wstack-protector
 WARNS := -Wall -Wextra -pedantic # -pedantic warns on language standards
 
 # Flags for compiling
-CFLAGS := -O3 $(STD) $(STACK) $(WARNS)
+CFLAGS := -O3 -g $(STD) $(STACK) $(WARNS)
 
 # Debug options
 DEBUG := # -g3 -D DEBUG=1
@@ -169,7 +169,7 @@ deb:
 	@cd build && tar -zcf $(PROJECT_NAME)_$(VERSION).orig.tar.gz $(PROJECT_NAME)-$(VERSION)
 	@cp -r build/debian build/$(PROJECT_NAME)-$(VERSION)
 	@cd build/$(PROJECT_NAME)-$(VERSION) \
-		&& debuild -uc -us --source-option=--include-binaries --source-option=-isession
+		&& debuild -uc -us
 
 debclean:
 	@rm -rf build/$(PROJECT_NAME)-$(VERSION)*
