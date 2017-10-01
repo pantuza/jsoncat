@@ -14,3 +14,6 @@ override_dh_auto_install:
 	install -d debian/jsoncat
 	install -D bin/jsoncat debian/jsoncat/usr/bin/jsoncat
 
+override_dh_strip:
+	chrpath -d debian/jsoncat/usr/bin/jsoncat
+	dh_strip --automatic-dbgsym
