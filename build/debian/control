@@ -8,6 +8,7 @@ Homepage: https://github.com/pantuza/jsoncat
 
 Package: jsoncat
 Architecture: any
+Depends: ${misc:Depends}
 Description: Json pretty-print parser based on a recursive lexical analyser.
  The parser was based on the specification defined at http://json.org.
  The input file is parsed to build a json object.
