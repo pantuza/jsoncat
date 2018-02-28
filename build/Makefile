@@ -32,7 +32,7 @@ AUTHOR_EMAIL := gustavopantuza@gmail.com
 
 
 # Author site
-AUTHOR_SITE := "https://pantuza.com"
+AUTHOR_SITE := "https://blog.pantuza.com"
 
 # Scripts directory
 SCRIPTS := scripts
