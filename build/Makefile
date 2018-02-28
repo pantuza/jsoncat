@@ -95,18 +95,31 @@ rpm:
 	@echo $(ECHO_OPTS) "$(BROWN)Building RPM package$(END_COLOR)\n";
 
 
+# Run debian container
+run_debian:
+ifeq ($(deb_running), $(DEB_CONTAINER))
+	$(info $(DEB_CONTAINER) already running)
+else
+	docker run -it --rm --name $(DEB_CONTAINER) -v $(PWD):/build -w /build/ -d debian:stretch
+endif
+
 # Build the project package for Debian distributions
-deb:
+deb: tarfile run_debian
 	@echo $(ECHO_OPTS) "$(BROWN)Building Debian package$(END_COLOR)\n";
-	@cp -v $(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME) $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION).orig.tar.gz
-	@tar -xzvf $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION).orig.tar.gz -C $(DEB_DIR)
-	@mv -vf $(DEB_DIR)/$(PROJECT_NAME) $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)
-	@mkdir -pv $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)/debian
-	@cp -v $(DEB_DIR)/{changelog,compat,control,rules,manpages} $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION)/debian/
-	@cd $(DEB_DIR)/$(PROJECT_NAME)_$(VERSION) && $(DPKGBUILD) -us -uc -d
+	@$(TAR) -xzvf $(TGZ_FILE_NAME)
+	@cp -v $(TGZ_FILE_NAME) $(PROJECT_NAME)_$(VERSION).orig.tar.gz
+	@cp -rv $(DEB_DIR) $(PROJECT_NAME)-$(VERSION)
+	docker exec -it $(DEB_CONTAINER) bash $(SCRIPTS)/debian_build.sh $(VERSION)
 
 project:
 	@make -C ..
+
+clean:
+	@rm -rvf *.tar.gz
+	@rm -rvf debian/*.tar.gz
+	@rm -rvf $(PROJECT_NAME)-*
+	@rm -rvf $(PROJECT_NAME)_*
+	@docker rm --force $(DEB_CONTAINER)
 
 # Creates the project manpage
 manpage:
