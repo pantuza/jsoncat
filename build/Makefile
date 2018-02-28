@@ -48,6 +48,17 @@ DPKGBUILD := $(shell which dpkg-buildpackage)
 # Git
 GIT := $(shell which git)
 
+# Tar program
+TAR := $(shell which tar)
+ifeq ($(OS),Darwin)
+TAR := $(shell which gtar)
+endif
+
+# Debian Container name
+DEB_CONTAINER := jsoncat_debian
+
+# Variables to check if containers are already running
+deb_running := $(shell docker ps --format "{{.Names}}" | grep $(DEB_CONTAINER))
 
 
 #
