@@ -70,16 +70,13 @@ all: opensuse rpm deb
 # Creates a tar.gz file with all source files
 tarfile:
 	@make -C .. clean;
-	@tar -czvf $(TGZ_FILE_NAME) ../../$(PROJECT_NAME) \
-		--exclude="*build*" --exclude="*.git*";
-	@echo $(ECHO_OPTS) "Removing older tar files:\n";
-	@rm -rvf $(OBS_DIR)/$(PROJECT_NAME)/*.tar.gz;
-	@mv -v $(TGZ_FILE_NAME) $(OBS_DIR)/$(PROJECT_NAME);
+	@$(TAR) -czvf $(TGZ_FILE_NAME) \
+			--exclude="*build*" \
+			--exclude="*.git*" \
+			--transform s/$(PROJECT_NAME)/$(PROJECT_NAME)-$(VERSION)/ \
+			../../$(PROJECT_NAME);
 	@echo $(ECHO_OPTS) "\n--\nCreated project tarball at " \
-		"$(BROWN)$(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME)$(END_COLOR)\n";
-	$(GIT) add $(OBS_DIR)/$(PROJECT_NAME);
-	$(GIT) commit -m "Creating tarball: $(TGZ_FILE_NAME)";
-	$(GIT) push origin master;
+		"$(BROWN)$(PWD)/$(TGZ_FILE_NAME)$(END_COLOR)\n";
 
 	
 new_version:
