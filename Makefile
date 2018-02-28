@@ -51,7 +51,7 @@ BINARY := jsoncat
 
 # %.o file names
 NAMES := $(notdir $(basename $(wildcard $(SRCDIR)/*.$(SRCEXT))))
-OBJECTS :=$(patsubst %,$(LIBDIR)/%.o,$(NAMES))
+OBJECTS := $(patsubst %,$(LIBDIR)/%.o,$(NAMES))
 
 
 
@@ -161,3 +161,17 @@ objects_test: $(TESTSDIR)/objects.sh
 # Rule to run samples parsing test
 samples_test: $(TESTSDIR)/samples.sh
 	@$(SHELL) $^
+
+help:
+	@echo $(ECHO_OPTS) "\n$(BROWN)#  J s o n  C a t  M a k e f i l e$(END_COLOR)\n\n"
+	@echo $(ECHO_OPTS) "Available target rules for this Makefile:\n\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)all (default)$(END_COLOR)\tCompile and link jsoncat binary\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)install$(END_COLOR)\t\tInstalls binary and man pages files on system\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)uninstall$(END_COLOR)\tRemove binary files from system\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)build$(END_COLOR)\t\tBuilds linux distributions packages (rpm && deb)\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)run$(END_COLOR)\t\tRun the compiled binary with a sample input file\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)valgrind$(END_COLOR)\tRun binary file with valgrind tool\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)debug$(END_COLOR)\t\tRuns the binary using gdb tool\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)test$(END_COLOR)\t\tRun entire project test suite\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)clean$(END_COLOR)\t\tCleans project files\n"
+	@echo $(ECHO_OPTS) "\t$(BLUE)help$(END_COLOR)\t\tPrints this help message\n\n"
