@@ -9,14 +9,8 @@
 include ../Makefile.conf
 
 
-# OpenSUSE Build Studio directory
-OBS_DIR := home\:pantuza
-
 # Debian directory
 DEB_DIR := debian
-
-# Get the Opensuse build studio client program
-OSC := $(shell which osc)
 
 
 # Packaged project file name
@@ -64,7 +58,7 @@ deb_running := $(shell docker ps --format "{{.Names}}" | grep $(DEB_CONTAINER))
 #
 # Target rules to build and package the project
 #
-all: opensuse rpm deb
+all: rpm deb
 
 
 # Creates a tar.gz file with all source files
@@ -81,14 +75,6 @@ tarfile:
 	
 new_version:
 	@. ${BUILDER} $@;
-
-# Builds the project package for OpenSUSE
-opensuse: $(OBS_DIR)/$(PROJECT_NAME)/$(TGZ_FILE_NAME)
-	@echo $(ECHO_OPTS) "$(BROWN)OpenSUSE Build Service$(END_COLOR)\n";
-	@$(OSC) update $(OBS_DIR)/$(PROJECT_NAME)
-	@make -C .. clean
-	@cd $(OBS_DIR)/$(PROJECT_NAME) && $(OSC) build
-
 
 # Builds the project package for RPM based distros
 rpm:
