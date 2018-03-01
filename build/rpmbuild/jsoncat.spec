@@ -16,7 +16,7 @@
 #
 
 Name:           jsoncat
-Version:		0.1.2
+Version:        0.6.0
 Release:        1%{?dist}
 License:        GPL-2.0+
 Summary:        Json pretty-print parser based on a recursive lexical analyser
@@ -45,7 +45,7 @@ install -m 644 docs/jsoncat.1 %{buildroot}%{_mandir}/man1/jsoncat.1
 
 
 %files
-%{_bindir}/jsoncat 
+%{_bindir}/jsoncat
 %{_mandir}/man1/jsoncat.1.gz
 
 %doc README.md
