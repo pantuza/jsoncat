@@ -33,18 +33,25 @@ The input file is parsed to build a json object.
 If the object is correct, it will be pretty-printed to standard output.
 
 %prep
-%autosetup -n %{name}
+# Extract archive to start build process
+%setup -c -n %{name}-%{version}.tar.gz
 
 %build
+cd %{name}-%{version}
 make CFLAGS="%{optflags}" %{?_smp_mflags}
 
 %install
+# Clear build root
+rm -rf $RPM_BUILD_ROOT
+
+cd %{name}-%{version}
 mkdir -p %{buildroot}%{_bindir}
 install bin/jsoncat %{buildroot}%{_bindir}
 
 mkdir -p %{buildroot}%{_mandir}/man1
 install -m 644 docs/jsoncat.1 %{buildroot}%{_mandir}/man1/jsoncat.1
 
+install -m 644 README.md %{buildroot}
 
 %files
 %{_bindir}/jsoncat
