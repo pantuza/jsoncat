@@ -2,7 +2,7 @@
 
 zypper update -y
 
-zypper install wget tar gcc make rpm-build rpmlint
+zypper install -y wget tar gcc make rpm-build rpmlint
 
 cd rpmbuild
 
