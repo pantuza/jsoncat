@@ -1,5 +1,6 @@
 #!/bin/bash
 
+OS=$(uname -s);
 
 ECHO=$(which echo);
 ECHOOPTS="-en";
@@ -11,13 +12,16 @@ GREP=$(which grep);
 CUT=$(which cut);
 
 SED=$(which sed);
+if [ "$OS" = "Darwin" ]; then
+    SED=$(which gsed);
+fi
 SEDOPTS="-i";
 
 GIT=$(which git);
 
 
 # Directories
-SPEC_DIR="home:pantuza/jsoncat";
+SPEC_DIR="rpmbuild";
 
 
 # Files
