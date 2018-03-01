@@ -84,9 +84,19 @@ tarfile:
 new_version:
 	@. ${BUILDER} $@;
 
+run_rpm:
+ifeq ($(rpm_running), $(RPM_CONTAINER))
+	$(info $(RPM_CONTAINER) already running)
+else
+	docker run -it --rm --name $(RPM_CONTAINER) -v $(PWD)/:/build -w /build/ -d opensuse:latest bash
+endif
+
+
 # Builds the project package for RPM based distros
-rpm:
+rpm: tarfile run_rpm $(SPEC_FILE)
 	@echo $(ECHO_OPTS) "$(BROWN)Building RPM package$(END_COLOR)\n";
+	docker exec -it $(RPM_CONTAINER) cp $(TGZ_FILE_NAME) /usr/src/packages/SOURCES/$(TGZ_FILE_NAME)
+	docker exec -it $(RPM_CONTAINER) bash $(SCRIPTS)/rpm_build.sh
 
 
 # Run debian container
