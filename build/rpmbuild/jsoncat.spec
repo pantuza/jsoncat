@@ -57,6 +57,6 @@ install -m 644 README.md %{buildroot}
 %{_bindir}/jsoncat
 %{_mandir}/man1/jsoncat.1.gz
 
-%doc README.md
+%doc %{buildroot}/README.md
 
 %changelog
