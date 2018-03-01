@@ -23,6 +23,8 @@ Summary:        Json pretty-print parser based on a recursive lexical analyser
 Url:            https://github.com/pantuza/%{name}
 Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+Group:          Applications/System
+BuildArch:      noarch
 
 %description
 Json pretty-print parser based on a recursive lexical analyser.
