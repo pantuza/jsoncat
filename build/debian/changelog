@@ -1,5 +1,4 @@
-jsoncat (0.1.2-1) stable; urgency=low
-
+jsoncat (0.7.0-1) stable; urgency=low
   * Initial Release
-
- -- Gustavo Pantuza <gustavopantuza@gmail.com>  Sun, 01 Oct 2017 10:46:11 +0000
+  * New version with support for rpm building
+ -- Gustavo Pantuza <gustavopantuza@gmail.com>  Thu, 01 Mar 2018 12:46:11 +0000
