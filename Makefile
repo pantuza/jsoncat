@@ -175,15 +175,3 @@ help:
 	@echo $(ECHO_OPTS) "\t$(BLUE)test$(END_COLOR)\t\tRun entire project test suite\n"
 	@echo $(ECHO_OPTS) "\t$(BLUE)clean$(END_COLOR)\t\tCleans project files\n"
 	@echo $(ECHO_OPTS) "\t$(BLUE)help$(END_COLOR)\t\tPrints this help message\n\n"
-
-deb:
-	@mkdir build/$(PROJECT_NAME)-$(VERSION)
-	@rsync -avrptP ./ --exclude=*.git* --exclude=build/ build/$(PROJECT_NAME)-$(VERSION)
-	@rm -rf build/$(PROJECT_NAME)-$(VERSION)/build
-	@cd build && tar -zcf $(PROJECT_NAME)_$(VERSION).orig.tar.gz $(PROJECT_NAME)-$(VERSION)
-	@cp -r build/debian build/$(PROJECT_NAME)-$(VERSION)
-	@cd build/$(PROJECT_NAME)-$(VERSION) \
-		&& debuild -uc -us
-
-debclean:
-	@rm -rf build/$(PROJECT_NAME)-$(VERSION)*
