@@ -22,7 +22,7 @@
 
 
 #define __JSONCAT_PROGRAM_NAME__ "jsoncat"
-#define __JSONCAT_VERSION__ "0.1.2"
+#define __JSONCAT_VERSION__ "0.6.0"
 #define __JSONCAT_AUTHOR__ "Gustavo Pantuza (gustavopantuza@gmail.com)"
 
 
