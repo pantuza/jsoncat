@@ -97,6 +97,7 @@ rpm: tarfile run_rpm $(SPEC_FILE)
 	@echo $(ECHO_OPTS) "$(BROWN)Building RPM package$(END_COLOR)\n";
 	docker exec -it $(RPM_CONTAINER) cp $(TGZ_FILE_NAME) /usr/src/packages/SOURCES/$(TGZ_FILE_NAME)
 	docker exec -it $(RPM_CONTAINER) bash $(SCRIPTS)/rpm_build.sh
+	docker cp $(RPM_CONTAINER):/usr/src/packages/RPMS/noarch/$(PROJECT_NAME)-$(VERSION)-1.noarch.rpm $(RPM_DIR)
 
 
 # Run debian container
