@@ -44,3 +44,7 @@ log/*
 build-stamp
 build/deb/jsoncat.debhelper.log
 build/jsoncat**
+
+# Skip rpm and deb packages
+*.rpm
+*.deb
