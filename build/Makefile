@@ -118,6 +118,13 @@ deb: tarfile run_debian
 project:
 	@make -C ..
 
+
+# Clean rpm build process
+clean_rpm:
+	@rm -rvf *.tar.gz
+	@docker rm --force $(RPM_CONTAINER)
+
+
 clean:
 	@rm -rvf *.tar.gz
 	@rm -rvf debian/*.tar.gz
