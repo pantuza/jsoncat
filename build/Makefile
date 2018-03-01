@@ -12,6 +12,11 @@ include ../Makefile.conf
 # Debian directory
 DEB_DIR := debian
 
+# RPM directory
+RPM_DIR := rpmbuild
+
+# RPM Spec file
+SPEC_FILE := $(RPM_DIR)/jsoncat.spec
 
 # Packaged project file name
 TGZ_FILE_NAME := $(PROJECT_NAME)-$(VERSION).tar.gz
@@ -33,10 +38,6 @@ SCRIPTS := scripts
 
 # Script for build
 BUILDER := ${SCRIPTS}/builder.sh
-
-
-# Dpkg Buildpackage
-DPKGBUILD := $(shell which dpkg-buildpackage)
 
 
 # Git
