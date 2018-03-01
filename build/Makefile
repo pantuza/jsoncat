@@ -56,6 +56,13 @@ DEB_CONTAINER := jsoncat_debian
 deb_running := $(shell docker ps --format "{{.Names}}" | grep $(DEB_CONTAINER))
 
 
+# RPM Container name
+RPM_CONTAINER := jsoncat_rpm
+
+# Variables to check if containers are already running
+rpm_running := $(shell docker ps --format "{{.Names}}" | grep $(RPM_CONTAINER))
+
+
 #
 # Target rules to build and package the project
 #
