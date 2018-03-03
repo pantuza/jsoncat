@@ -163,18 +163,18 @@ manpage:
 		  'stdin. For example, parsing a request:\n\n' >> $(MANPAGE)
 	@echo '$$\> curl -s $(AUTHOR_SITE)/sample.json ' \
 		  '--insecure | jsoncat' >> $(MANPAGE)
-	@echo $(ECHO_OPTS) "\n{\n\t'what': \"A json example file\",\n\t'test': " \
-		  "true,\n\t'values': [ 42, 10, 5.32],\n\t'data': {\n\t\t'name': " \
-		  "'Test Name',\n\t\t'type': null\n\t}\n}" >> $(MANPAGE)
+	@echo $(ECHO_OPTS) '\n{\n\t"what": \"A json example file\",\n\t"test": ' \
+		  'true,\n\t"values": [ 42, 10, 5.32],\n\t"data": {\n\t\t"name": ' \
+		  '"Test Name",\n\t\t"type": null\n\t}\n}' >> $(MANPAGE)
 	@echo $(ECHO_OPTS) '\n\nOr simple by passing a path to a json file as ' \
 		  'follows:\n\n' >> $(MANPAGE)
 	@echo $(ECHO_OPTS) '$$\> $(PROJECT_NAME) ' \
 		  'tests/samples/input_06.json' >> $(MANPAGE)
-	@echo $(ECHO_OPTS) "\n\n{\n\t'age': 42,\n\t'name': 'marvin',\n\t'what':" \
-		  "'robot'\n}\n\n" >> $(MANPAGE) 
+	@echo $(ECHO_OPTS) '\n\n{\n\t"age": 42,\n\t"name": "marvin",\n\t"what":' \
+		  '"robot"\n}\n\n' >> $(MANPAGE)
 	@echo 'Or yet, again from stdin, by echoing a json:' >> $(MANPAGE)
-	@echo $(ECHO_OPTS) "\n$$\> echo \"{'test': true}\" | jsoncat" >> $(MANPAGE)
-	@echo $(ECHO_OPTS) "\n\n{\n\t'test': true\n}\n" >> $(MANPAGE)
+	@echo $(ECHO_OPTS) "\n$$\> echo '{\"test\": true}' | jsoncat" >> $(MANPAGE)
+	@echo $(ECHO_OPTS) '\n\n{\n\t"test": true\n}\n' >> $(MANPAGE)
 	@echo $(ECHO_OPTS) '\n.RE\n.fi\n.PP\n' >> $(MANPAGE)
 	@echo '.SH BUGS' >> $(MANPAGE)
 	@echo 'Report bugs to $(AUTHOR_EMAIL)' >> $(MANPAGE)
