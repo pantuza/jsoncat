@@ -126,6 +126,7 @@ clean:
 	@rm -rvf $(BINDIR)/*;
 	@rm -rvf $(LIBDIR)/*;
 	@rm -rvf $(LOGDIR)/*;
+	@rm -rvf $(DOCS)/*;
 
 
 # Rule to run the project tests
