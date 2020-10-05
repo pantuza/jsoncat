@@ -75,6 +75,19 @@ new_version ()
 
 
 #
+# Prints Usage message
+#
+usage ()
+{
+    echo "Usage: . scripts/builder.sh [command]"
+    echo
+    echo "Commands:"
+    echo
+    echo "  new_version             Generates the new jsoncat tag/release"
+    echo
+}
+
+#
 # Main function to handle build process
 #
 main ()
@@ -85,6 +98,7 @@ main ()
             ;;
         *)
             ${ECHO} ${ECHOOPTS} "No function to satisfy '$1'";
+            usage;
             exit 1;
     esac;
 }
