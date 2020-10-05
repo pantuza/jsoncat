@@ -48,3 +48,7 @@ build/jsoncat**
 # Skip rpm and deb packages
 *.rpm
 *.deb
+
+# Do not add manpages to revision
+docs/*
+!docs/.gitkeep
